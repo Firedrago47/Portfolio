@@ -1,35 +1,21 @@
 "use client";
 
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
-
-let lenis: Lenis | null = null;
 
 export default function Navbar() {
-  useEffect(() => {
-    if (!lenis) {
-      lenis = new Lenis();
-
-      function raf(time: number) {
-        lenis?.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
-    }
-  }, []);
-
   const handleScroll = (id: string) => {
-    if (lenis) {
-      lenis.scrollTo(id);
-    }
-  };
+  const target = document.querySelector(id);
+  const lenis = (window as any).lenis;
+  if (target && lenis) {
+    lenis.scrollTo(target, { offset: -80 });
+  }
+};
+
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-sm px-6 py-4 flex items-center justify-between border-b-2 rounded-b border-white-200">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-sm px-6 py-4 flex items-center justify-between">
       {/* Left Section (logo / name placeholder) */}
-      <div className="text-xl font-bold">
+      <div className="text-xl font-grotesk">
         <span className="cursor-pointer">MyPortfolio</span>
       </div>
 
@@ -37,25 +23,25 @@ export default function Navbar() {
       <div className="flex gap-8">
         <button
           onClick={() => handleScroll("#about")}
-          className="hover:text-gray-400 transition"
+          className="hover:text-gray-400 transition font-bold"
         >
           About
         </button>
         <button
           onClick={() => handleScroll("#projects")}
-          className="hover:text-gray-400 transition"
+          className="hover:text-gray-400 transition font-bold"
         >
           Projects
         </button>
         <button
           onClick={() => handleScroll("#contact")}
-          className="hover:text-gray-400 transition"
+          className="hover:text-gray-400 transition font-bold"
         >
           Contact
         </button>
       </div>
 
-      {/* Right Section (Social Icons) */}
+      {/* Right Section (Social Icons + Theme) */}
       <div className="flex gap-4 text-xl">
         <a
           href="https://linkedin.com"

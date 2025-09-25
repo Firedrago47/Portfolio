@@ -2,47 +2,56 @@
 import Link from "next/link";
 import useLenis from "./hooks/useLenis";
 import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import ExperienceTimeline from "./components/ExperienceTimeline";
+import HorizontalSection from "./components/HorizontalSection";
+import HorizontalTimeline from "./components/HorizontalTimeline";
+
+const experienceItems = [
+  { date: "2022 - Present", title: "Software Engineer", description: "Building scalable apps.", skills: ["React", "Node"] },
+  { date: "2020 - 2021", title: "Frontend Developer", description: "Delivered responsive UIs.", skills: ["Next.js", "Tailwind"] },
+];
+
+const educationItems = [
+  { date: "2018 - 2022", title: "B.Tech CSE", description: "Graduated with strong foundation.", gpa: "8.5" },
+  { date: "2016 - 2018", title: "High School", description: "Completed with distinction." },
+];
+const items: TimelineItem[] = [
+  ...experienceItems.map((e) => ({
+    title: e.title,
+    subtitle: e.company ?? e.subtitle, // if you have company field
+    description: e.description,
+    period: e.date, // <-- map `date` to `period`
+    skills: e.skills,
+    type: "experience" as const,
+  })),
+  ...educationItems.map((ed) => ({
+    title: ed.title,
+    subtitle: ed.institution ?? ed.subtitle,
+    description: ed.description,
+    period: ed.date,
+    gpa: ed.gpa,
+    type: "education" as const,
+  })),
+];
 
 export default function Home() {
   useLenis(); // Initialize Lenis
 
   return (
-    <main className="bg-black text-white">
+    <main className=" text-white">
       {/* Navbar */}
       <Navbar/>
-
       {/* About Section */}
-      <section
-        id="about"
-        className="h-screen flex flex-col items-center justify-center px-6"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">Deepan Raj S</h1>
-        <p className="text-lg max-w-xl font-bold text-center text-gray-300">
-          I'm a passionate developer building smooth digital experiences.
-        </p>
-      </section>
-
+      <About/>
       {/* Projects Section */}
-      <section
-        id="projects"
-        className="h-screen flex flex-col items-center justify-center px-6 bg-gray-900"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">Projects</h1>
-        <p className="text-lg max-w-xl text-center text-gray-300">
-          Here are some of my works and experiments.
-        </p>
-      </section>
+      <HorizontalTimeline items={items} />
 
+      <Projects/>
       {/* Contact Section */}
-      <section
-        id="contact"
-        className="h-screen flex flex-col items-center justify-center px-6 bg-gray-800"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">Contact</h1>
-        <p className="text-lg max-w-xl text-center text-gray-300">
-          Let’s build something amazing together! Drop me a message.
-        </p>
-      </section>
+      <Contact/>
     </main>
   );
 }
