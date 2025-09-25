@@ -15,27 +15,27 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-sm px-6 py-4 flex items-center justify-between">
       {/* Left Section (logo / name placeholder) */}
-      <div className="text-xl font-grotesk">
-        <span className="cursor-pointer">MyPortfolio</span>
+      <div className="text-xl">
+        <span className="cursor-pointer font-alata">MyPortfolio</span>
       </div>
 
       {/* Center Section (Navigation) */}
       <div className="flex gap-8">
         <button
           onClick={() => handleScroll("#about")}
-          className="hover:text-gray-400 transition font-bold"
+          className="font-alata hover:text-gray-400 transition"
         >
           About
         </button>
         <button
           onClick={() => handleScroll("#projects")}
-          className="hover:text-gray-400 transition font-bold"
+          className="font-grotesk hover:text-gray-400 transition"
         >
           Projects
         </button>
         <button
           onClick={() => handleScroll("#contact")}
-          className="hover:text-gray-400 transition font-bold"
+          className="hover:text-gray-400 transition font-alata"
         >
           Contact
         </button>
