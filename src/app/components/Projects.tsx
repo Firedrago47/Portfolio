@@ -1,4 +1,3 @@
-// components/Projects.tsx
 "use client";
 
 import React from "react";
@@ -39,12 +38,29 @@ const projects = [
   },
 ];
 
+// ✨ Animation Variants
+const slideVariants = {
+  hiddenLeft: { opacity: 0, x: -80 },
+  hiddenRight: { opacity: 0, x: 80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 60,
+      damping: 15,
+      duration: 0.8,
+    },
+  },
+};
+
 export default function Projects() {
   return (
     <section
       id="projects"
       className="min-h-screen flex flex-col px-6 md:px-20 py-20 bg-neutral-950 text-white"
     >
+      {/* Section Header */}
       <h1 className="text-4xl md:text-6xl font-grotesk mb-6 text-center">
         Projects
       </h1>
@@ -52,45 +68,50 @@ export default function Projects() {
         Here are some of my works and experiments.
       </p>
 
-      {/* Bento Grid */}
+      {/* ✳️ Bento Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[200px] gap-6">
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.15 }}
-            viewport={{ once: true }}
-            className={`${project.size || ""} ${
-              project.bg ||
-              `bg-gradient-to-br ${project.gradient}`
-            } rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition`}
-          >
-            <div>
-              <h2
-                className={`${
-                  project.size ? "text-2xl" : "text-xl"
-                } font-grotesk mb-2`}
-              >
-                {project.title}
-              </h2>
-              <p
-                className={`${
-                  project.gradient ? "text-gray-200" : "text-gray-400 text-sm"
-                }`}
-              >
-                {project.description}
-              </p>
-            </div>
-            <a
-              href={project.link}
-              target="_blank"
-              className={`mt-4 font-medium ${project.textColor}`}
+        {projects.map((project, index) => {
+          const fromLeft = index % 2 === 0;
+
+          return (
+            <motion.div
+              key={index}
+              variants={slideVariants}
+              initial={fromLeft ? "hiddenLeft" : "hiddenRight"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className={`${project.size || ""} ${
+                project.bg || `bg-gradient-to-br ${project.gradient}`
+              } rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300`}
             >
-              View Project →
-            </a>
-          </motion.div>
-        ))}
+              <div>
+                <h2
+                  className={`${
+                    project.size ? "text-2xl" : "text-xl"
+                  } font-grotesk mb-2`}
+                >
+                  {project.title}
+                </h2>
+                <p
+                  className={`${
+                    project.gradient
+                      ? "text-gray-200"
+                      : "text-gray-400 text-sm"
+                  }`}
+                >
+                  {project.description}
+                </p>
+              </div>
+              <a
+                href={project.link}
+                target="_blank"
+                className={`mt-4 font-medium ${project.textColor}`}
+              >
+                View Project →
+              </a>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
