@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,10 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export type TimelineItem = {
   title: string;
-  subtitle?: string;
-  description?: string;
   period: string;
-  type: "experience" | "education";
+  description: string;
+  type?: "education" | "experience";
 };
 
 interface HorizontalTimelineProps {
@@ -22,153 +20,152 @@ interface HorizontalTimelineProps {
 export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const parallaxRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const dotRefs = useRef<HTMLDivElement[]>([]);
+  const descRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
-    const parallax = parallaxRef.current;
-    if (!section || !track || !parallax) return;
+    const glow = glowRef.current;
+    if (!section || !track || !glow) return;
 
     const totalScroll = Math.max(0, track.scrollWidth - window.innerWidth);
 
-    // Create timeline for horizontal scrolling
-    const tl = gsap.timeline({
+    // Horizontal track scroll
+    gsap.to(track, {
+      x: () => -totalScroll,
+      ease: "none",
       scrollTrigger: {
         trigger: section,
         start: "top top",
         end: () => `+=${totalScroll}`,
         scrub: 1,
         pin: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
       },
     });
 
-    tl.to(track, { x: () => -totalScroll, ease: "none" }, 0);
-
-    // Parallax movement for background
-    gsap.to(parallax, {
-      x: () => totalScroll * -0.2,
+    // Glow beam dynamic width
+    gsap.set(glow, { width: 0 });
+    gsap.to(glow, {
+      width: () => track.scrollWidth,
       ease: "none",
       scrollTrigger: {
         trigger: section,
         start: "top top",
         end: () => `+=${totalScroll}`,
-        scrub: true,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const totalDots = dotRefs.current.length;
+
+          dotRefs.current.forEach((dot, idx) => {
+            const threshold = idx / (totalDots - 1);
+            if (progress >= threshold) {
+              gsap.to(dot, {
+                backgroundColor: "#3b82f6",
+                boxShadow: "0 0 8px 5px rgba(59,130,246,0.6)",
+                scale: 1.2,
+                duration: 0.3,
+                ease: "back.out(2)",
+              });
+            } else {
+              gsap.to(dot, {
+                backgroundColor: "#6b7280",
+                boxShadow: "none",
+                scale: 1,
+                duration: 0.3,
+              });
+            }
+          });
+        },
       },
     });
-
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
   }, [items]);
+
+  dotRefs.current = [];
+  descRefs.current = [];
 
   return (
     <section
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-neutral-950 text-white"
     >
-      {/* 🌈 Parallax Gradient Background */}
+      {/* Center Line */}
+      <div className="absolute top-1/2 left-0 w-full h-[4px] bg-gray-700 z-10" />
+
+      {/* Glowing Beam */}
       <div
-        ref={parallaxRef}
-        className="absolute inset-0 bg-gradient-to-r from-indigo-900/30 via-black to-emerald-900/30 opacity-40 blur-xl"
-        style={{ willChange: "transform" }}
+        ref={glowRef}
+        className="absolute top-1/2 left-0 h-[4px] rounded-full
+                   bg-gradient-to-r from-blue-400 via-white to-blue-400
+                   shadow-[0_0_16px_8px_rgba(59,130,246,0.5)] z-20"
       />
 
-      {/* Heading */}
-      <h2 className="absolute top-16 left-1/2 -translate-x-1/2 text-4xl font-grotesk z-20 tracking-wide">
-        Education & Experience
-      </h2>
-
-      {/* Static Center Line */}
-      <div className="absolute top-1/2 left-0 w-full h-[3px] bg-gray-700 z-10" />
-
-      {/* Horizontal Scroll Track */}
+      {/* Timeline Track */}
       <div
         ref={trackRef}
-        className="relative flex flex-nowrap h-full items-center w-max px-[25vw] z-20"
-        style={{ gap: "10rem", willChange: "transform" }}
+        className="relative flex flex-nowrap h-full items-center w-max
+                   px-[10vw] sm:px-[12vw] md:px-[15vw]
+                   gap-32 sm:gap-48 md:gap-64 z-30"
       >
-        {items.map((item, idx) => {
-          const isTop = idx % 2 === 0;
-
-          return (
-            <div
-              key={idx}
-              className="relative flex-shrink-0 flex flex-col items-center justify-center"
-              style={{ width: "320px" }}
-            >
-              {/* Dot */}
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 150, damping: 12 }}
-                viewport={{ once: true }}
-                className={`w-6 h-6 rounded-full shadow-md z-20 ${
-                  item.type === "experience" ? "bg-blue-500" : "bg-emerald-500"
-                }`}
-                style={{
-                  position: "absolute",
-                  top: "47%",
-                  transform: "translateY(-50%)",
-                }}
-              />
-
-              {/* Connecting Line */}
-              <div
-                className={`absolute w-[2px] bg-gray-500 ${
-                  isTop ? "bottom-1/2" : "top-1/2"
-                }`}
-                style={{ height: "80px" }}
-              />
-
-              {/* Card */}
-              <motion.div
-                initial={{ opacity: 0, y: isTop ? -40 : 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.3 }}
-                className={`relative p-6 rounded-2xl bg-white/5 border border-white/10 shadow-xl backdrop-blur-md hover:scale-[1.03] transition-transform ${
-                  isTop ? "mb-[200px]" : "mt-[210px]"
-                }`}
-                style={{ minWidth: "360px" }}
-              >
-                <h3 className="text-xl sm:text-2xl font-grotesk mb-2">
-                  {item.title}
-                </h3>
-                {item.subtitle && (
-                  <p
-                    className={`text-md mb-3 ${
-                      item.type === "experience"
-                        ? "text-blue-400"
-                        : "text-emerald-400"
-                    }`}
-                  >
-                    {item.subtitle}
-                  </p>
-                )}
+        {items.map((item, idx) => (
+          <div
+            key={idx}
+            className="relative flex-shrink-0 flex flex-col items-center justify-center group"
+            style={{ width: "360px" }}
+          >
+            {/* Top: period + title + badge */}
+            <div className="absolute -top-32 sm:-top-36 md:-top-40 text-center">
+              <p className="text-sm sm:text-base text-gray-300 uppercase tracking-wide mb-2">
+                {item.period}
+              </p>
+              <p className="text-xl sm:text-2xl font-bold text-white mb-2">
+                {item.title}
+              </p>
+              {item.type && (
                 <span
-                  className={`inline-block px-3 py-1 text-sm mb-3 rounded-full ${
-                    item.type === "experience"
-                      ? "bg-blue-500/10 text-blue-300 border border-blue-500/20"
-                      : "bg-emerald-500/10 text-emerald-300 border border-emerald-500/20"
+                  className={`inline-block text-xs sm:text-sm font-semibold px-3 py-1 rounded-full border ${
+                    item.type === "education"
+                      ? "text-emerald-400 border-emerald-500/20 bg-emerald-500/10"
+                      : "text-blue-400 border-blue-500/20 bg-blue-500/10"
                   }`}
                 >
-                  {item.period}
+                  {item.type}
                 </span>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
+              )}
             </div>
-          );
-        })}
-      </div>
 
-      {/* Depth Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 pointer-events-none" />
+            {/* Dot */}
+            <div
+              ref={(el) => {
+                if (el) dotRefs.current[idx] = el;
+              }}
+              className="w-5 h-5 bg-gray-500 mt-1 rounded-full z-20 relative transition-all duration-300 cursor-pointer"
+            />
+
+            {/* Bottom: description */}
+            <div
+              ref={(el) => {
+                if (el) descRefs.current[idx] = el;
+              }}
+              className="absolute top-20 sm:top-28 md:top-20 text-center w-56 sm:w-64 md:w-72 transition-colors duration-300 text-gray-400"
+              onMouseEnter={() => {
+                if (descRefs.current[idx])
+                  descRefs.current[idx].classList.add("text-white");
+              }}
+              onMouseLeave={() => {
+                if (descRefs.current[idx])
+                  descRefs.current[idx].classList.remove("text-white");
+              }}
+            >
+              <p className="text-sm sm:text-base leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const projects = [
   {
@@ -38,18 +38,18 @@ const projects = [
   },
 ];
 
-// ✨ Animation Variants
-const slideVariants = {
+// ✅ Fixed Variants with proper Transition type
+const slideVariants: Variants = {
   hiddenLeft: { opacity: 0, x: -80 },
   hiddenRight: { opacity: 0, x: 80 },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
-      type: "spring",
-      stiffness: 60,
-      damping: 15,
-      duration: 0.8,
+      type: "spring", // ✅ now recognized as a valid enum
+      stiffness: 80,
+      damping: 20,
+      mass: 0.8,
     },
   },
 };
@@ -60,7 +60,7 @@ export default function Projects() {
       id="projects"
       className="min-h-screen flex flex-col px-6 md:px-20 py-20 bg-neutral-950 text-white"
     >
-      {/* Section Header */}
+      {/* Heading */}
       <h1 className="text-4xl md:text-6xl font-grotesk mb-6 text-center">
         Projects
       </h1>

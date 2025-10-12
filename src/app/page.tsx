@@ -5,58 +5,49 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import HorizontalTimeline from "./components/HorizontalTimeline";
-export type TimelineItem = {
-  title: string;
-  subtitle?: string;
-  description?: string;
-  period: string;
-  skills?: string[];
-  gpa?: string;
-  type: "experience" | "education";
-};
-
-const educationItems = [
-  { date: "2018 - 2022", title: "B.Tech CSE", description: "Graduated with strong foundation.", gpa: "8.5" },
-  { date: "2016 - 2018", title: "High School", description: "Completed with distinction." },
-];
-const experienceItems = [
-  { date: "2022 - Present", title: "Software Engineer", description: "Building scalable apps.", skills: ["React", "Node"] },
-  { date: "2020 - 2021", title: "Frontend Developer", description: "Delivered responsive UIs.", skills: ["Next.js", "Tailwind"] },
-];
+import HorizontalTimeline, { TimelineItem } from "./components/HorizontalTimeline";
 
 const items: TimelineItem[] = [
-  ...educationItems.map((ed) => ({
-    title: ed.title,
-    description: ed.description,
-    period: ed.date,
-    gpa: ed.gpa,
-    type: "education" as const,
-  })),
-  ...experienceItems.map((e) => ({
-    title: e.title,
-    description: e.description,
-    period: e.date, // <-- map `date` to `period`
-    skills: e.skills,
-    type: "experience" as const,
-  })),
+  {
+    title: "Frontend Developer",
+    period: "2020 - 2022",
+    description:
+      "Worked on multiple client projects using React, Next.js, and Tailwind CSS. Focused on responsive design, performance optimization, and creating reusable UI components. Collaborated with designers and backend engineers to deliver high-quality web apps.",
+    type: "experience",
+  },
+  {
+    title: "Frontend Developer",
+    period: "2020 - 2022",
+    description:
+      "Worked on multiple client projects using React, Next.js, and Tailwind CSS. Focused on responsive design, performance optimization, and creating reusable UI components. Collaborated with designers and backend engineers to deliver high-quality web apps.",
+    type: "experience",
+  },
+  {
+    title: "Bachelor of Computer Science",
+    period: "2016 - 2020",
+    description:
+      "Completed a full-time undergraduate program focusing on software development, algorithms, and database systems. Participated in coding competitions and contributed to open-source projects.",
+    type: "education",
+  },
+  {
+    title: "Bachelor of Computer Science",
+    period: "2016 - 2020",
+    description:
+      "Completed a full-time undergraduate program focusing on software development, algorithms, and database systems. Participated in coding competitions and contributed to open-source projects.",
+    type: "education",
+  },
 ];
 
 export default function Home() {
   useLenis(); // Initialize Lenis
 
   return (
-    <main className=" text-white">
-      {/* Navbar */}
-      <Navbar/>
-      {/* About Section */}
-      <About/>
-      {/* Projects Section */}
+    <main className="text-white">
+      <Navbar />
+      <About />
       <HorizontalTimeline items={items} />
-
-      <Projects/>
-      {/* Contact Section */}
-      <Contact/>
+      <Projects />
+      <Contact />
     </main>
   );
 }
