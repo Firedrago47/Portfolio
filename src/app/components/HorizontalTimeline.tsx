@@ -61,26 +61,31 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
 
           dotRefs.current.forEach((dot, idx) => {
             const threshold = idx / (totalDots - 1);
+
             if (progress >= threshold) {
+              // ACTIVE DOT: Gradient + Glow
               gsap.to(dot, {
-                backgroundColor: "#3b82f6",
-                boxShadow: "0 0 8px 5px rgba(59,130,246,0.6)",
+                background: "radial-gradient(circle, #60a5fa, #2563eb)",
+                boxShadow: "0 0 15px 6px rgba(59,130,246,0.6)",
                 scale: 1.2,
-                duration: 0.3,
+                duration: 0.4,
                 ease: "back.out(2)",
               });
             } else {
+              // INACTIVE DOT: Faded Gray Gradient
               gsap.to(dot, {
-                backgroundColor: "#6b7280",
+                background: "radial-gradient(circle, #6b7280, #374151)",
                 boxShadow: "none",
                 scale: 1,
                 duration: 0.3,
+                ease: "power2.out",
               });
             }
           });
         },
       },
     });
+
   }, [items]);
 
   dotRefs.current = [];
