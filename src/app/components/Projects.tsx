@@ -38,18 +38,32 @@ const projects = [
   },
 ];
 
-// ✅ Fixed Variants with proper Transition type
-const slideVariants: Variants = {
-  hiddenLeft: { opacity: 0, x: -80 },
-  hiddenRight: { opacity: 0, x: 80 },
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+// 🎥 Cards rise up, fade in, and rotate slightly for cinematic entry
+const cardVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 80,
+    rotateX: 15,
+    scale: 0.9,
+    transformPerspective: 1000,
+  },
   visible: {
     opacity: 1,
-    x: 0,
+    y: 0,
+    rotateX: 0,
+    scale: 1,
     transition: {
-      type: "spring", // ✅ now recognized as a valid enum
-      stiffness: 80,
-      damping: 20,
-      mass: 0.8,
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -58,61 +72,88 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col px-6 md:px-20 py-20 bg-neutral-950 text-white"
+      className="min-h-screen flex flex-col px-6 md:px-20 py-20 bg-neutral-950 text-white perspective-[1200px]"
     >
       {/* Heading */}
-      <h1 className="text-4xl md:text-6xl font-grotesk mb-6 text-center">
+      <motion.h1
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-4xl md:text-6xl font-grotesk mb-6 text-center"
+      >
         Projects
-      </h1>
-      <p className="text-lg max-w-2xl text-center font-mono text-gray-300 mx-auto mb-12">
-        Here are some of my works and experiments.
-      </p>
+      </motion.h1>
 
-      {/* ✳️ Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[200px] gap-6">
-        {projects.map((project, index) => {
-          const fromLeft = index % 2 === 0;
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="text-lg max-w-2xl text-center font-mono text-gray-300 mx-auto mb-12"
+      >
+        A few of my featured works and experiments.
+      </motion.p>
 
-          return (
-            <motion.div
-              key={index}
-              variants={slideVariants}
-              initial={fromLeft ? "hiddenLeft" : "hiddenRight"}
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              className={`${project.size || ""} ${
-                project.bg || `bg-gradient-to-br ${project.gradient}`
-              } rounded-2xl p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300`}
-            >
-              <div>
-                <h2
-                  className={`${
-                    project.size ? "text-2xl" : "text-xl"
-                  } font-grotesk mb-2`}
-                >
-                  {project.title}
-                </h2>
-                <p
-                  className={`${
-                    project.gradient
-                      ? "text-gray-200"
-                      : "text-gray-400 text-sm"
-                  }`}
-                >
-                  {project.description}
-                </p>
-              </div>
-              <a
-                href={project.link}
-                target="_blank"
-                className={`mt-4 font-medium ${project.textColor}`}
+      {/* ✳️ Animated Bento Grid */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-4 auto-rows-[200px] gap-6"
+      >
+        {projects.map((project, index) => (
+          <motion.div
+            key={index}
+            variants={cardVariants}
+            whileHover={{
+              scale: 1.05,
+              rotateX: 2,
+              rotateY: -2,
+              boxShadow: "0 0 30px rgba(147,197,253,0.25)",
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 150,
+              damping: 15,
+              mass: 0.8,
+            }}
+            className={`${project.size || ""} ${
+              project.bg || `bg-gradient-to-br ${project.gradient}`
+            } rounded-2xl p-6 flex flex-col justify-between 
+              hover:translate-y-[-4px] transition-all duration-300
+              border border-white/5 hover:border-white/20 backdrop-blur-sm`}
+          >
+            <div>
+              <h2
+                className={`${
+                  project.size ? "text-2xl" : "text-xl"
+                } font-grotesk mb-2`}
               >
-                View Project →
-              </a>
-            </motion.div>
-          );
-        })}
-      </div>
+                {project.title}
+              </h2>
+              <p
+                className={`${
+                  project.gradient
+                    ? "text-gray-200"
+                    : "text-gray-400 text-sm"
+                }`}
+              >
+                {project.description}
+              </p>
+            </div>
+
+            <a
+              href={project.link}
+              target="_blank"
+              className={`mt-4 font-medium ${project.textColor}`}
+            >
+              View Project →
+            </a>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }

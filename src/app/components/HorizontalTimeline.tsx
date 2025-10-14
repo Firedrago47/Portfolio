@@ -24,15 +24,19 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const dotRefs = useRef<HTMLDivElement[]>([]);
   const descRefs = useRef<HTMLDivElement[]>([]);
 
+  // --- Glow beam sync with dots ---
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     const glow = glowRef.current;
     if (!section || !track || !glow) return;
 
-    const totalScroll = Math.max(0, track.scrollWidth - window.innerWidth);
+    const itemWidth = 360; // each timeline item width
+    const totalItems = items.length;
+    const totalTrackWidth = track.scrollWidth;
+    const totalScroll = Math.max(0, totalTrackWidth - window.innerWidth);
 
-    // Horizontal track scroll
+    // Horizontal scroll animation
     gsap.to(track, {
       x: () => -totalScroll,
       ease: "none",
@@ -45,10 +49,9 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
       },
     });
 
-    // Glow beam dynamic width
+    // Beam + Dots animation
     gsap.set(glow, { width: 0 });
     gsap.to(glow, {
-      width: () => track.scrollWidth,
       ease: "none",
       scrollTrigger: {
         trigger: section,
@@ -57,22 +60,29 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
-          const totalDots = dotRefs.current.length;
 
+          // Calculate glow width (includes extra space for screen end)
+          const beamMaxWidth =
+            totalItems * itemWidth +
+            (window.innerWidth * 0.5); // beam ends at screen edge
+          const currentWidth = progress * beamMaxWidth;
+
+          gsap.set(glow, { width: currentWidth });
+
+          // Handle dot glow activation
           dotRefs.current.forEach((dot, idx) => {
-            const threshold = idx / (totalDots - 1);
+            const dotStart = (idx * itemWidth) / beamMaxWidth;
+            const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
 
-            if (progress >= threshold) {
-              // ACTIVE DOT: Gradient + Glow
+            if (progress >= dotStart && progress < dotEnd) {
               gsap.to(dot, {
                 background: "radial-gradient(circle, #60a5fa, #2563eb)",
                 boxShadow: "0 0 15px 6px rgba(59,130,246,0.6)",
                 scale: 1.2,
-                duration: 0.4,
+                duration: 0.2,
                 ease: "back.out(2)",
               });
-            } else {
-              // INACTIVE DOT: Faded Gray Gradient
+            } else if (progress < dotStart) {
               gsap.to(dot, {
                 background: "radial-gradient(circle, #6b7280, #374151)",
                 boxShadow: "none",
@@ -85,9 +95,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
         },
       },
     });
-
   }, [items]);
-
   dotRefs.current = [];
   descRefs.current = [];
 
@@ -118,7 +126,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
           <div
             key={idx}
             className="relative flex-shrink-0 flex flex-col items-center justify-center group"
-            style={{ width: "360px" }}
+            style={{ width: "400px" }}
           >
             {/* Top: period + title + badge */}
             <div className="absolute -top-32 sm:-top-36 md:-top-40 text-center">

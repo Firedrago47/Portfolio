@@ -36,13 +36,13 @@ export default function TechStack() {
   return (
     <section className="relative py-24 px-6 md:px-16 bg-transparent overflow-hidden">
       {/* Subtle glowing orb background */}
-      <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(142,21,239,0.15)_0%,transparent_70%)] animate-[spin_45s_linear_infinite] -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(2,0,36,1)_0%,transparent_70%)] animate-[spin_45s_linear_infinite] -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent uppercase tracking-wide">
-            Tech Stack & <span className="text-purple-400">Expertise</span>
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-blue-400 to-violet-400 bg-clip-text text-transparent uppercase tracking-wide">
+            Tech Stack & <span className="text-purple-500">Expertise</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto mt-4 text-lg font-light">
             Crafting digital experiences with cutting-edge technologies and modern development practices.
@@ -55,10 +55,10 @@ export default function TechStack() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2.5 rounded-full border transition-all duration-300 text-sm font-semibold ${
+              className={`px-5 py-2.5 rounded-full border transition-all duration-300 text-sm font-grotesk ${
                 selectedCategory === category
-                  ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent scale-105 shadow-lg shadow-purple-500/20"
-                  : "border-gray-700 text-gray-400 hover:text-white hover:border-purple-500"
+                  ? "bg-gradient-to-r from-blue-950 to-blue-600 text-white border-transparent scale-105 shadow-lg shadow-blue-500/20"
+                  : "border-gray-700 text-gray-400 hover:text-white hover:border-blue-500"
               }`}
             >
               {category}

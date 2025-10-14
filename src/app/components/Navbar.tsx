@@ -38,7 +38,7 @@ export default function Navbar() {
     // Animate center glow
     if (centerRef.current) {
       gsap.to(centerRef.current, {
-        boxShadow: "0 0 10px 5px rgba(255,255,255,0.6)",
+        boxShadow: "0 0 4px 2px rgba(255,255,255,0.6)",
         duration: 1,
         repeat: -1,
         yoyo: true,

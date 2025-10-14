@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Space_Mono, Alata } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -31,13 +30,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${spaceMono.variable} ${alata.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${spaceMono.variable} ${alata.variable} antialiased bg-neutral-950 text-white`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

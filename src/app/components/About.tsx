@@ -29,13 +29,13 @@ export default function About() {
         </h1>
         <p className="text-lg md:text-xl font-grotesk text-gray-200 max-w-2xl leading-relaxed">
           I’m a passionate{" "}
-          <span className="text-indigo-400 font-mono">
+          <span className="text-blue-400 font-mono">
             Full-Stack Developer
           </span>{" "}
           with a strong interest in crafting smooth and modern digital experiences.  
           My focus is on building scalable web applications, interactive UI/UX, and seamless
           performance using{" "}
-          <span className="text-indigo-400 font-mono">
+          <span className="text-blue-400 font-mono">
             React, Next.js, and Node.js
           </span>.
         </p>
