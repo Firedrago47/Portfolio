@@ -26,7 +26,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-neutral-950 to-neutral-900 text-white overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-neutral-950 text-white overflow-hidden"
     >
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
