@@ -9,7 +9,7 @@ const projects = [
     description:
       "Built with Next.js, TailwindCSS, and Framer Motion for smooth animations.",
     link: "#",
-    gradient: "from-indigo-900 to-purple-900",
+    gradient: "from-zinc-900 to-blue-900",
     size: "md:col-span-2 row-span-2",
     textColor: "text-indigo-200 hover:text-white",
   },
@@ -32,7 +32,7 @@ const projects = [
     description:
       "Built with Next.js, OpenAI API, and Cloudinary for image hosting.",
     link: "#",
-    gradient: "from-pink-900 to-orange-900",
+    gradient: "from-gray-900 to-violet-900",
     size: "md:col-span-2",
     textColor: "text-pink-100 hover:text-white",
   },

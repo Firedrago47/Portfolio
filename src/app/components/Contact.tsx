@@ -49,12 +49,12 @@ const Contact = () => {
       {!showForm && (
         <motion.button
           whileHover={{
-            scale: 1.02,
-            boxShadow: "0 0 8px rgba(99,102,241,0.5)",
+            scale: 1.01,
+            boxShadow: "0 0 5px rgba(255,255,255,0.2)",
           }}
           whileTap={{ scale: 0.97 }}
           onClick={() => setShowForm(true)}
-          className="px-10 py-4 rounded-2xl bg-gradient-to-r  from-blue-500 via-blue-700 to-blue-800 font-semibold tracking-wide shadow-xl transition-all"
+          className="px-10 py-4 rounded-2xl bg-gradient-to-r  from-zinc-900 via-blue-800 to-blue-950 font-semibold tracking-wide shadow-xl transition-all"
         >
           Let’s Connect
         </motion.button>
