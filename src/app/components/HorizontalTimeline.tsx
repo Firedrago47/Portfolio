@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Variable } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +24,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const glowRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<HTMLDivElement[]>([]);
   const descRefs = useRef<HTMLDivElement[]>([]);
-
+  
   // --- Glow beam sync with dots ---
   useEffect(() => {
     const section = sectionRef.current;
@@ -126,14 +127,14 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
           <div
             key={idx}
             className="relative flex-shrink-0 flex flex-col items-center justify-center group"
-            style={{ width: "400px" }}
+            style={{ width: "380px" }}
           >
             {/* Top: period + title + badge */}
-            <div className="absolute -top-32 sm:-top-36 md:-top-40 text-center">
-              <p className="text-sm sm:text-base text-gray-300 uppercase tracking-wide mb-2">
+            <div className="absolute md:mb-60 text-center">
+              <p className="text-sm sm:text-base text-gray-300 uppercase tracking-wide font-bold mb-2">
                 {item.period}
               </p>
-              <p className="text-xl sm:text-2xl font-bold text-white mb-2">
+              <p className="text-xl sm:text-2xl font-bold text-white mb-4">
                 {item.title}
               </p>
               {item.type && (
@@ -162,7 +163,10 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               ref={(el) => {
                 if (el) descRefs.current[idx] = el;
               }}
-              className="absolute top-20 sm:top-28 md:top-20 text-center w-56 sm:w-64 md:w-72 transition-colors duration-300 text-gray-400"
+              className="absolute top-24 sm:top-28 md:top-20 w-64 sm:w-72 md:w-80 p-5 rounded-xl 
+             bg-white/4 backdrop-blur-md border border-white/10 
+             shadow-[0_0_15px_rgba(59,130,246,0.15)]
+             text-gray-300 transition-all duration-300 hover:border-blue-500 hover:bg-white/10 hover:text-white"
               onMouseEnter={() => {
                 if (descRefs.current[idx])
                   descRefs.current[idx].classList.add("text-white");
@@ -170,9 +174,9 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               onMouseLeave={() => {
                 if (descRefs.current[idx])
                   descRefs.current[idx].classList.remove("text-white");
-              }}
+              }} 
             >
-              <p className="text-sm sm:text-base leading-relaxed">
+              <p className={`text-sm sm:text-base leading-tight font-alata`}>
                 {item.description}
               </p>
             </div>
