@@ -72,7 +72,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col px-6 md:px-20 py-20 bg-neutral-950 text-white perspective-[1200px]"
+      className="min-h-screen flex flex-col px-6 md:px-16 py-16 bg-neutral-950 text-white perspective-[1200px]"
     >
       {/* Heading */}
       <motion.h1
@@ -80,7 +80,7 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2 }}
         viewport={{ once: true }}
-        className="text-2xl md:text-5xl font-grotesk mb-6 text-center"
+        className="text-2xl md:text-5xl font-grotesk mb-4 text-center"
       >
         Projects
       </motion.h1>
@@ -90,7 +90,7 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
         viewport={{ once: true }}
-        className="text-lg max-w-2xl text-center font-mono text-gray-300 mx-auto mb-12"
+        className="text-lg max-w-2xl text-center font-alata text-gray-300 mx-auto mb-8"
       >
         A few of my featured works and experiments.
       </motion.p>
@@ -122,7 +122,7 @@ export default function Projects() {
             className={`${project.size || ""} ${
               project.bg || `bg-gradient-to-br ${project.gradient}`
             } rounded-2xl p-6 flex flex-col justify-between 
-              hover:translate-y-[-4px] transition-all duration-300
+              hover:translate-y-[-4px] transition-all duration-100
               border border-white/5 hover:border-white/20 backdrop-blur-sm`}
           >
             <div>
@@ -136,7 +136,7 @@ export default function Projects() {
               <p
                 className={`${
                   project.gradient
-                    ? "text-gray-200"
+                    ? "text-gray-200 text-sm"
                     : "text-gray-400 text-sm"
                 }`}
               >

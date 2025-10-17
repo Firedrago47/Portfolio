@@ -24,7 +24,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const glowRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<HTMLDivElement[]>([]);
   const descRefs = useRef<HTMLDivElement[]>([]);
-  
+
   // --- Glow beam sync with dots ---
   useEffect(() => {
     const section = sectionRef.current;
@@ -134,7 +134,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               <p className="text-sm sm:text-base text-gray-300 uppercase tracking-wide font-bold mb-2">
                 {item.period}
               </p>
-              <p className="text-xl sm:text-2xl font-bold text-white mb-4">
+              <p className="text-xl sm:text-2xl font-bold text-zinc-300 mb-4">
                 {item.title}
               </p>
               {item.type && (

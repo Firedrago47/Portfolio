@@ -68,7 +68,7 @@ export default function Navbar() {
       {/* Center Section (Sticky) with Glow */}
       <div
         ref={centerRef}
-        className="sticky top-4 mx-auto z-50 bg-black/40 backdrop-blur-md rounded-full px-6 py-2 flex gap-6 shadow-md transition-shadow duration-300 font-grotesk"
+        className="sticky top-4 mx-auto z-50 bg-black/40 backdrop-blur-md rounded-full px-6 py-2 flex gap-6 shadow-md transition-shadow duration-300 font-alata"
       >
         <button
           onClick={() => handleScroll("#about")}

@@ -24,6 +24,19 @@ html{
   font-weight: 400;
   font-style: normal;
 }
+.font-spaceGrotesk {
+  font-family: var(--font-space-grotesk);
+}
+.font-spaceMono {
+  font-family: var(--font-space-mono);
+}
+.font-alata {
+  font-family: var(--font-alata);
+}
+.font-lora {
+  font-family: var(--font-lora);
+}
+
 /* === Neon Animated Border === */
 .neon-border {
   position: relative;

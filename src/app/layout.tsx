@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Space_Mono, Alata } from "next/font/google";
+import { Space_Grotesk, Space_Mono, Alata, Lora } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-space-grotesk",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lora",
 });
 
 const spaceMono = Space_Mono({
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${spaceMono.variable} ${alata.variable} antialiased bg-neutral-950 text-white`}
+        className={`${spaceGrotesk.variable} ${spaceMono.variable} ${alata.variable} ${lora.variable} antialiased bg-neutral-950 text-white`}
       >
         {children}
       </body>

@@ -41,10 +41,10 @@ export default function TechStack() {
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <h2 className="text-5xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-blue-400 to-violet-400 bg-clip-text text-transparent uppercase tracking-wide">
-            Tech Stack & <span className="text-purple-500">Expertise</span>
+          <h2 className="text-5xl md:text-4xl font-bold bg-white bg-clip-text text-transparent uppercase tracking-wide">
+            Tech Stack & <span className="text-blue-500">Expertise</span>
           </h2>
-          <p className="text-gray-400 max-w-l mx-auto mt-4 text-sm font-light">
+          <p className="text-gray-400 max-w-l mx-auto mt-4 text-base font-mono">
             Crafting digital experiences with cutting-edge technologies and modern development practices.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function TechStack() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 rounded-full border transition-all duration-300 text-sm font-grotesk ${
+              className={`px-5 py-2 rounded-full border transition-all duration-300 text-sm font-mono ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-blue-950 to-blue-600 text-white border-black scale-105 shadow-lg shadow-blue-500/10"
                   : "border-gray-700 text-gray-400 hover:text-white hover:border-blue-500"
@@ -84,7 +84,7 @@ export default function TechStack() {
               }}
             >
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-lg font-bold text-gray-100">{tech.name}</h3>
+                <h3 className="text-lg font-grotesk text-gray-100">{tech.name}</h3>
                 <span
                   className="text-white text-xs px-3 py-1 rounded-full font-semibold"
                   style={{ background: tech.color }}
@@ -92,7 +92,7 @@ export default function TechStack() {
                   {tech.category}
                 </span>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed">{tech.description}</p>
+              <p className="text-gray-400 text-sm font-mono leading-relaxed">{tech.description}</p>
               <p className="text-gray-500 italic text-xs mt-3">{tech.experience} experience</p>
             </motion.div>
           ))}
