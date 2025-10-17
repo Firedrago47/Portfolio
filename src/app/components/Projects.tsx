@@ -62,7 +62,7 @@ const cardVariants: Variants = {
     rotateX: 0,
     scale: 1,
     transition: {
-      duration: 0.8,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -78,9 +78,9 @@ export default function Projects() {
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.2 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-6xl font-grotesk mb-6 text-center"
+        className="text-2xl md:text-5xl font-grotesk mb-6 text-center"
       >
         Projects
       </motion.h1>
@@ -88,7 +88,7 @@ export default function Projects() {
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
         viewport={{ once: true }}
         className="text-lg max-w-2xl text-center font-mono text-gray-300 mx-auto mb-12"
       >
@@ -108,16 +108,16 @@ export default function Projects() {
             key={index}
             variants={cardVariants}
             whileHover={{
-              scale: 1.05,
+              scale: 1.02,
               rotateX: 2,
               rotateY: -2,
-              boxShadow: "0 0 30px rgba(147,197,253,0.25)",
+              boxShadow: "0 0 16px rgba(147,197,253,0.25)",
             }}
             transition={{
               type: "spring",
-              stiffness: 150,
-              damping: 15,
-              mass: 0.8,
+              stiffness: 100,
+              damping: 10,
+              mass: 0.5,
             }}
             className={`${project.size || ""} ${
               project.bg || `bg-gradient-to-br ${project.gradient}`

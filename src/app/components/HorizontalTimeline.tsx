@@ -10,7 +10,7 @@ export type TimelineItem = {
   title: string;
   period: string;
   description: string;
-  type?: "education" | "experience";
+  type?: "Education" | "Experience";
 };
 
 interface HorizontalTimelineProps {
@@ -102,7 +102,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-neutral-950 text-white"
+      className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-black to-neutral-950 text-white"
     >
       {/* Center Line */}
       <div className="absolute top-1/2 left-0 w-full h-[4px] bg-gray-700 z-10" />
@@ -139,7 +139,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               {item.type && (
                 <span
                   className={`inline-block text-xs sm:text-sm font-semibold px-3 py-1 rounded-full border ${
-                    item.type === "education"
+                    item.type === "Education"
                       ? "text-emerald-400 border-emerald-500/20 bg-emerald-500/10"
                       : "text-blue-400 border-blue-500/20 bg-blue-500/10"
                   }`}

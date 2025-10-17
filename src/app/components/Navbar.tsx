@@ -51,7 +51,7 @@ export default function Navbar() {
     const target = document.querySelector(id);
     const lenis = (window as any).lenis;
     if (target && lenis) {
-      lenis.scrollTo(target, { offset: -80 });
+      lenis.scrollTo(target, { offset: -10 });
     }
   };
 

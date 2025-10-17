@@ -41,7 +41,7 @@ const Contact = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-lg max-w-xl text-center text-gray-300 mb-10"
+        className="text-lg max-w-xl text-center text-gray-300 mb-8"
       >
         Have a project or idea? Let’s make it real together.
       </motion.p>
@@ -54,7 +54,7 @@ const Contact = () => {
           }}
           whileTap={{ scale: 0.97 }}
           onClick={() => setShowForm(true)}
-          className="px-10 py-4 rounded-2xl bg-gradient-to-r  from-zinc-900 via-blue-800 to-blue-950 font-semibold tracking-wide shadow-xl transition-all"
+          className="px-10 py-4 rounded-2xl bg-gradient-to-r  from-zinc-900 to-blue-900 font-semibold tracking-wide shadow-xl transition-all"
         >
           Let’s Connect
         </motion.button>
@@ -69,7 +69,7 @@ const Contact = () => {
             exit={{ opacity: 0, y: 30, scale: 0.98 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
             onSubmit={handleSubmit}
-            className="relative w-full max-w-lg mt-6 p-[2px] rounded-3xl neon-border"
+            className="relative w-full max-w-lg mt-1 p-[2px] rounded-3xl neon-border"
           >
             {/* Inner Form Container */}
             <div className="relative z-10 p-8 rounded-3xl bg-black border border-white/10 shadow-2xl">

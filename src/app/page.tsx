@@ -10,25 +10,25 @@ import TechStack from "./components/Techstack";
 
 const items: TimelineItem[] = [
   {
-    title: "Bachelor of Computer Science",
-    period: "2016 - 2020",
-    description:
-      "Completed a full-time undergraduate program focusing on software development, algorithms, and database systems. Participated in coding competitions and contributed to open-source projects.",
-    type: "education",
-  },
-  {
-    title: "Bachelor of Computer Science",
-    period: "2016 - 2020",
-    description:
-      "Completed a full-time undergraduate program focusing on software development, algorithms, and database systems. Participated in coding competitions and contributed to open-source projects.",
-    type: "education",
-  },
-  {
-    title: "Frontend Developer",
+    title: "High School Education",
     period: "2020 - 2022",
     description:
-      "Worked on multiple client projects using React, Next.js, and Tailwind CSS. Focused on responsive design, performance optimization, and creating reusable UI components. Collaborated with designers and backend engineers to deliver high-quality web apps.",
-    type: "experience",
+      "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming, technology, and creative problem-solving.",
+    type: "Education",
+  },
+  {
+    title: "Bachelor of Computer Science",
+    period: "2022 - 2026",
+    description:
+      "Graduated with a degree in Computer Science. Built a strong foundation in algorithms, data structures, and web development. Participated in hackathons and open-source contributions.",
+    type: "Education",
+  },
+  {
+    title: "Software Developer (Freelance)",
+    period: "2023 - Present",
+    description:
+      "Worked as a freelance frontend developer for small businesses and startups. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
+    type: "Experience",
   },
 ];
 
