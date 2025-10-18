@@ -25,83 +25,110 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const descRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    const glow = glowRef.current;
-    if (!section || !track || !glow) return;
+  const section = sectionRef.current;
+  const track = trackRef.current;
+  const glow = glowRef.current;
+  if (!section || !track || !glow) return;
 
-    const itemWidth = 300; // smaller width for responsiveness
-    const totalItems = items.length;
-    const totalTrackWidth = track.scrollWidth;
-    const totalScroll = Math.max(0, totalTrackWidth - window.innerWidth);
+  const itemWidth = 300; // smaller width for responsiveness
+  const totalItems = items.length;
+  const totalTrackWidth = track.scrollWidth;
+  const totalScroll = Math.max(0, totalTrackWidth - window.innerWidth);
 
-    // --- Reset existing triggers to prevent duplication on resize ---
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-    // Horizontal scroll pin animation
-    gsap.to(track, {
-      x: () => -totalScroll,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: () => `+=${totalScroll}`,
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1,
-      },
-    });
+  // --- Horizontal scroll ---
+  gsap.to(track, {
+    x: () => -totalScroll,
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: () => `+=${totalScroll}`,
+      scrub: 1,
+      pin: true,
+      anticipatePin: 1,
+    },
+  });
 
-    // Beam animation
-    gsap.set(glow, { width: 0 });
-    gsap.to(glow, {
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: () => `+=${totalScroll}`,
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const beamMaxWidth =
-            totalItems * itemWidth + window.innerWidth * 0.5;
-          const currentWidth = progress * beamMaxWidth;
-          gsap.set(glow, { width: currentWidth });
+  // --- Beam animation ---
+  gsap.set(glow, { width: 0 });
+  gsap.to(glow, {
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: () => `+=${totalScroll}`,
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const beamMaxWidth = totalItems * itemWidth + window.innerWidth * 0.5;
+        const currentWidth = progress * beamMaxWidth;
+        gsap.set(glow, { width: currentWidth });
 
-          // Animate dots
-          dotRefs.current.forEach((dot, idx) => {
-            const dotStart = (idx * itemWidth) / beamMaxWidth;
-            const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
-            if (progress >= dotStart && progress < dotEnd) {
-              gsap.to(dot, {
-                background: "radial-gradient(circle, #60a5fa, #2563eb)",
-                boxShadow: "0 0 6px 2px rgba(59,130,246,0.6)",
-                scale: 1.2,
-                duration: 0.2,
-                ease: "back.out(2)",
+        dotRefs.current.forEach((dot, idx) => {
+          const dotStart = (idx * itemWidth) / beamMaxWidth;
+          const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
+
+          if (progress >= dotStart && progress < dotEnd) {
+            // --- Active dot ---
+            gsap.to(dot, {
+              background: "radial-gradient(circle, #60a5fa, #2563eb)",
+              boxShadow: "0 0 6px 2px rgba(59,130,246,0.6)",
+              scale: 1.2,
+              duration: 0.2,
+              ease: "back.out(2)",
+            });
+
+            // --- Fade in the corresponding description ---
+            const desc = descRefs.current[idx];
+            if (desc) {
+              gsap.to(desc, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power3.out",
               });
-            } else if (progress < dotStart){
-              gsap.to(dot, {
-                background: "radial-gradient(circle, #6b7280, #374151)",
-                boxShadow: "none",
-                scale: 1,
-                duration: 0.3,
+            }
+          } else if (progress < dotStart) {
+            // --- Reset before it reaches ---
+            gsap.to(dot, {
+              background: "radial-gradient(circle, #6b7280, #374151)",
+              boxShadow: "none",
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+
+            const desc = descRefs.current[idx];
+            if (desc) {
+              gsap.to(desc, {
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
                 ease: "power2.out",
               });
             }
-          });
-        },
+          }
+        });
       },
-    });
+    },
+  });
 
-    // Refresh triggers on resize
-    const handleResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [items]);
+  // --- Initial hidden state for all descriptions ---
+  descRefs.current.forEach((desc) => {
+    gsap.set(desc, { opacity: 0, y: 30 });
+  });
+
+  const handleResize = () => ScrollTrigger.refresh();
+  window.addEventListener("resize", handleResize);
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  };
+}, [items]);
+
 
   dotRefs.current = [];
   descRefs.current = [];
@@ -168,9 +195,9 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
                 if (el) descRefs.current[idx] = el;
               }}
               className="absolute top-20 sm:top-18 md:top-20 w-[70vw] sm:w-64 md:w-100 p-10 md:p-10 rounded-2xl 
-              bg-white/4 backdrop-blur-md border border-white/10 
+              bg-white/6 backdrop-blur-md border border-white/10 
               shadow-[0_0_8px_rgba(59,130,246,0.15)]
-              text-gray-300 transition-all duration-300 hover:border-blue-500 hover:bg-white/10 hover:text-white"
+              text-gray-300 transition-all duration-300 hover:border-blue-500 hover:bg-gray-900 hover:text-white"
             >
               <p className="text-sm sm:text-base md:text-base leading-tight font-alata">
                 {item.description}
