@@ -42,28 +42,11 @@ export default function TechStack() {
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-5xl md:text-4xl font-bold bg-white bg-clip-text text-transparent uppercase tracking-wide">
-            Tech Stack & <span className="text-blue-500">Expertise</span>
+            Tech <span className="text-blue-500">Stack</span>
           </h2>
           <p className="text-gray-400 max-w-l mx-auto mt-4 text-base font-mono">
             Crafting digital experiences with cutting-edge technologies and modern development practices.
           </p>
-        </div>
-
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 rounded-full border transition-all duration-300 text-sm font-mono ${
-                selectedCategory === category
-                  ? "bg-gradient-to-r from-blue-950 to-blue-600 text-white border-black scale-105 shadow-lg shadow-blue-500/10"
-                  : "border-gray-700 text-gray-400 hover:text-white hover:border-blue-500"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
         </div>
 
         {/* Tech Cards */}

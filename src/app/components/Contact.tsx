@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Handshake, Mail, Send, X } from "lucide-react";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -48,15 +49,38 @@ const Contact = () => {
 
       {!showForm && (
         <motion.button
-          whileHover={{
-            scale: 1.01,
-            boxShadow: "0 0 5px rgba(255,255,255,0.2)",
-          }}
-          whileTap={{ scale: 0.97 }}
           onClick={() => setShowForm(true)}
-          className="px-10 py-4 rounded-2xl bg-gradient-to-r  from-zinc-900 to-blue-900 font-semibold tracking-wide shadow-xl transition-all"
+          className="relative group flex items-center justify-center w-16 h-16 rounded-full overflow-hidden 
+                    bg-gradient-to-br from-blue-800 to-purple-800 shadow-lg"
+          whileHover={{
+            scale: 1.1,
+            rotate: 5,
+            boxShadow: "0 0 25px rgba(96,165,250,0.9)",
+          }}
+          whileTap={{ scale: 0.95 }}
         >
-          Let’s Connect
+          {/* Holographic Shimmer Overlay */}
+          <motion.span
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-800 via-cyan-800 to-yellow-800 opacity-50 mix-blend-screen"
+            style={{ backgroundSize: "200% 200%" }}
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+
+          {/* Icon */}
+          <motion.span
+            className="relative z-10 text-white"
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <Mail className="w-6 h-6" />
+          </motion.span>
         </motion.button>
       )}
 
@@ -101,27 +125,48 @@ const Contact = () => {
                   rows={5}
                   className="w-full px-4 py-3 rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
                 />
-
                 <div className="flex gap-4 mt-2">
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    type="submit"
-                    className="flex-1 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 hover:to-blue-600 font-grotesk shadow-lg transition"
-                  >
-                    Send Message
-                  </motion.button>
+                {/* Send Button */}
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  type="submit"
+                  className="relative flex items-center justify-center flex-1 px-6 py-3 rounded-lg shadow-lg overflow-hidden
+                            bg-gradient-to-r from-blue-950 via-blue-800 to-blue-800"
+                >
+                  {/* Holographic Shimmer Overlay */}
+                  <motion.span
+                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-pink-800 to-cyan-800 opacity-50 mix-blend-screen"
+                    style={{ backgroundSize: "200% 200%" }}
+                    animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  />
 
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    type="button"
-                    onClick={() => setShowForm(false)}
-                    className="px-6 py-3 rounded-lg border border-gray-600 text-gray-300 hover:text-white hover:border-gray-400 transition"
-                  >
-                    Cancel
-                  </motion.button>
-                </div>
+                  {/* Icon */}
+                  <Send className="relative z-10 w-5 h-5 text-white" />
+                </motion.button>
+
+                {/* Cancel Button */}
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                  className="relative flex items-center justify-center px-6 py-3 rounded-lg border border-gray-600 overflow-hidden"
+                >
+                  {/* Holographic Shimmer Overlay */}
+                  <motion.span
+                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 to-zinc-800 opacity-40 mix-blend-screen"
+                    style={{ backgroundSize: "200% 200%" }}
+                    animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  />
+
+                  {/* Icon */}
+                  <X className="relative z-10 w-5 h-5 text-gray-300 hover:text-white" />
+                </motion.button>
+              </div>
+
               </div>
             </div>
           </motion.form>

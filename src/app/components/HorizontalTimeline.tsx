@@ -3,7 +3,6 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Variable } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,19 +24,21 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const dotRefs = useRef<HTMLDivElement[]>([]);
   const descRefs = useRef<HTMLDivElement[]>([]);
 
-  // --- Glow beam sync with dots ---
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     const glow = glowRef.current;
     if (!section || !track || !glow) return;
 
-    const itemWidth = 360; // each timeline item width
+    const itemWidth = 300; // smaller width for responsiveness
     const totalItems = items.length;
     const totalTrackWidth = track.scrollWidth;
     const totalScroll = Math.max(0, totalTrackWidth - window.innerWidth);
 
-    // Horizontal scroll animation
+    // --- Reset existing triggers to prevent duplication on resize ---
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+    // Horizontal scroll pin animation
     gsap.to(track, {
       x: () => -totalScroll,
       ease: "none",
@@ -47,10 +48,11 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
         end: () => `+=${totalScroll}`,
         scrub: 1,
         pin: true,
+        anticipatePin: 1,
       },
     });
 
-    // Beam + Dots animation
+    // Beam animation
     gsap.set(glow, { width: 0 });
     gsap.to(glow, {
       ease: "none",
@@ -61,29 +63,24 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
-
-          // Calculate glow width (includes extra space for screen end)
           const beamMaxWidth =
-            totalItems * itemWidth +
-            (window.innerWidth * 0.5); // beam ends at screen edge
+            totalItems * itemWidth + window.innerWidth * 0.5;
           const currentWidth = progress * beamMaxWidth;
-
           gsap.set(glow, { width: currentWidth });
 
-          // Handle dot glow activation
+          // Animate dots
           dotRefs.current.forEach((dot, idx) => {
             const dotStart = (idx * itemWidth) / beamMaxWidth;
             const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
-
             if (progress >= dotStart && progress < dotEnd) {
               gsap.to(dot, {
                 background: "radial-gradient(circle, #60a5fa, #2563eb)",
-                boxShadow: "0 0 15px 6px rgba(59,130,246,0.6)",
+                boxShadow: "0 0 6px 2px rgba(59,130,246,0.6)",
                 scale: 1.2,
                 duration: 0.2,
                 ease: "back.out(2)",
               });
-            } else if (progress < dotStart) {
+            } else if (progress < dotStart){
               gsap.to(dot, {
                 background: "radial-gradient(circle, #6b7280, #374151)",
                 boxShadow: "none",
@@ -96,7 +93,16 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
         },
       },
     });
+
+    // Refresh triggers on resize
+    const handleResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, [items]);
+
   dotRefs.current = [];
   descRefs.current = [];
 
@@ -105,36 +111,34 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-black to-neutral-950 text-white"
     >
-      {/* Center Line */}
-      <div className="absolute top-1/2 left-0 w-full h-[4px] bg-gray-700 z-10" />
+      {/* Base Line */}
+      <div className="absolute top-1/2 left-0 w-full h-[3px] bg-gray-700 z-10" />
 
       {/* Glowing Beam */}
       <div
         ref={glowRef}
-        className="absolute top-1/2 left-0 h-[4px] rounded-full
-                   bg-gradient-to-r from-blue-400 via-white to-blue-400
-                   shadow-[0_0_16px_8px_rgba(59,130,246,0.5)] z-20"
+        className="absolute top-1/2 left-0 h-[3px] rounded-full
+        bg-gradient-to-r from-blue-400 via-white to-blue-400
+        shadow-[0_0_10px_2px_rgba(59,130,246,0.5)] z-20"
       />
 
       {/* Timeline Track */}
       <div
         ref={trackRef}
-        className="relative flex flex-nowrap h-full items-center w-max
-                   px-[10vw] sm:px-[12vw] md:px-[15vw]
-                   gap-32 sm:gap-48 md:gap-64 z-30"
+        className="relative flex flex-nowrap items-center w-max h-full px-[8vw] sm:px-[10vw] gap-20 sm:gap-40 md:gap-64 z-30"
       >
         {items.map((item, idx) => (
           <div
             key={idx}
             className="relative flex-shrink-0 flex flex-col items-center justify-center group"
-            style={{ width: "380px" }}
+            style={{ width: "min(100vw, 360px)" }} // auto shrink on mobile
           >
-            {/* Top: period + title + badge */}
-            <div className="absolute md:mb-60 text-center">
-              <p className="text-sm sm:text-base text-gray-300 uppercase tracking-wide font-bold mb-2">
+            {/* Top content */}
+            <div className="absolute -top-40 sm:-top-50 text-center">
+              <p className="text-xs sm:text-sm md:text-base text-gray-300 uppercase tracking-wide font-bold mb-2">
                 {item.period}
               </p>
-              <p className="text-xl sm:text-2xl font-bold text-zinc-300 mb-4">
+              <p className="text-2xl sm:text-2xl md:text-3xl font-bold text-zinc-300 mb-3">
                 {item.title}
               </p>
               {item.type && (
@@ -155,28 +159,20 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               ref={(el) => {
                 if (el) dotRefs.current[idx] = el;
               }}
-              className="w-5 h-5 bg-gray-500 mt-1 rounded-full z-20 relative transition-all duration-300 cursor-pointer"
+              className="w-4 h-4 sm:w-5 sm:h-5 bg-gray-500 mt-1 rounded-full z-20 relative transition-all duration-300"
             />
 
-            {/* Bottom: description */}
+            {/* Description */}
             <div
               ref={(el) => {
                 if (el) descRefs.current[idx] = el;
               }}
-              className="absolute top-24 sm:top-28 md:top-20 w-64 sm:w-72 md:w-80 p-5 rounded-xl 
-             bg-white/4 backdrop-blur-md border border-white/10 
-             shadow-[0_0_15px_rgba(59,130,246,0.15)]
-             text-gray-300 transition-all duration-300 hover:border-blue-500 hover:bg-white/10 hover:text-white"
-              onMouseEnter={() => {
-                if (descRefs.current[idx])
-                  descRefs.current[idx].classList.add("text-white");
-              }}
-              onMouseLeave={() => {
-                if (descRefs.current[idx])
-                  descRefs.current[idx].classList.remove("text-white");
-              }} 
+              className="absolute top-20 sm:top-18 md:top-20 w-[70vw] sm:w-64 md:w-100 p-10 md:p-10 rounded-2xl 
+              bg-white/4 backdrop-blur-md border border-white/10 
+              shadow-[0_0_8px_rgba(59,130,246,0.15)]
+              text-gray-300 transition-all duration-300 hover:border-blue-500 hover:bg-white/10 hover:text-white"
             >
-              <p className={`text-sm sm:text-base leading-tight font-alata`}>
+              <p className="text-sm sm:text-base md:text-base leading-tight font-alata">
                 {item.description}
               </p>
             </div>
