@@ -37,7 +37,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
 
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-  // --- Horizontal scroll ---
+  // Horizontal scroll
   gsap.to(track, {
     x: () => -totalScroll,
     ease: "none",
@@ -51,7 +51,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
     },
   });
 
-  // --- Beam animation ---
+  // Beam animation
   gsap.set(glow, { width: 0 });
   gsap.to(glow, {
     ease: "none",
@@ -71,7 +71,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
           const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
 
           if (progress >= dotStart && progress < dotEnd) {
-            // --- Active dot ---
+            // Active dot 
             gsap.to(dot, {
               background: "radial-gradient(circle, #60a5fa, #2563eb)",
               boxShadow: "0 0 6px 2px rgba(59,130,246,0.6)",
@@ -80,7 +80,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               ease: "back.out(2)",
             });
 
-            // --- Fade in the corresponding description ---
+            // Fade in the corresponding description 
             const desc = descRefs.current[idx];
             if (desc) {
               gsap.to(desc, {
@@ -91,7 +91,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               });
             }
           } else if (progress < dotStart) {
-            // --- Reset before it reaches ---
+            //  Reset before it reaches
             gsap.to(dot, {
               background: "radial-gradient(circle, #6b7280, #374151)",
               boxShadow: "none",
@@ -115,7 +115,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
     },
   });
 
-  // --- Initial hidden state for all descriptions ---
+  // Initial hidden state for all descriptions
   descRefs.current.forEach((desc) => {
     gsap.set(desc, { opacity: 0, y: 30 });
   });

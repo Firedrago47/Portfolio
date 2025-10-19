@@ -16,7 +16,7 @@ export default function Navbar() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    // ✅ Desktop fade animation using gsap.matchMedia
+    // Desktop fade animation using gsap.matchMedia
     mm.add("(min-width: 768px)", () => {
       const left = leftRef.current;
       if (!left) return;
@@ -33,7 +33,7 @@ export default function Navbar() {
       return () => fadeTrigger.kill();
     });
 
-    // ✅ Center glow animation
+    // Center glow animation
     const glowTween = gsap.to(centerRef.current, {
       boxShadow: "0 0 6px 3px rgba(255,255,255,0.55)",
       duration: 1,

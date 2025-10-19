@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, Mail, Github, Linkedin } from "lucide-react";
+import { Download, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
 
 export default function About() {
   const handleScroll = (id: string) => {
@@ -33,14 +33,14 @@ export default function About() {
     },
     {
       id: 3,
-      icon: <Github className="w-6 h-6" />,
+      icon: <GithubIcon className="w-6 h-6" />,
       href: "https://github.com/Firedrago47",
       title: "GitHub",
       action: "link",
     },
     {
       id: 4,
-      icon: <Linkedin className="w-6 h-6" />,
+      icon: <LinkedinIcon className="w-6 h-6" />,
       href: "https://linkedin.com/in/yourusername",
       title: "LinkedIn",
       action: "link",

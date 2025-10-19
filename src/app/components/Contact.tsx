@@ -51,7 +51,7 @@ const Contact = () => {
         <motion.button
           onClick={() => setShowForm(true)}
           className="relative group flex items-center justify-center w-16 h-16 rounded-full overflow-hidden 
-                    bg-gradient-to-br from-blue-800 to-purple-800 shadow-lg"
+                    bg-gradient-to-br from-blue-500 to-purple-800 shadow-lg"
           whileHover={{
             scale: 1.1,
             rotate: 5,
@@ -61,7 +61,7 @@ const Contact = () => {
         >
           {/* Holographic Shimmer Overlay */}
           <motion.span
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-800 via-cyan-800 to-yellow-800 opacity-50 mix-blend-screen"
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-500 opacity-10 mix-blend-screen"
             style={{ backgroundSize: "200% 200%" }}
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -132,11 +132,11 @@ const Contact = () => {
                   whileTap={{ scale: 0.97 }}
                   type="submit"
                   className="relative flex items-center justify-center flex-1 px-6 py-3 rounded-lg shadow-lg overflow-hidden
-                            bg-gradient-to-r from-blue-950 via-blue-800 to-blue-800"
+                            bg-gradient-to-r from-blue-900 via-blue-800 to-blue-800"
                 >
                   {/* Holographic Shimmer Overlay */}
                   <motion.span
-                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-pink-800 to-cyan-800 opacity-50 mix-blend-screen"
+                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 via-blue-400 to-gray-800 opacity-50 mix-blend-screen"
                     style={{ backgroundSize: "200% 200%" }}
                     animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}

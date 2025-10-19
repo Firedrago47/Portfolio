@@ -33,7 +33,7 @@ const items: TimelineItem[] = [
 ];
 
 export default function Home() {
-  useLenis(); // Initialize Lenis
+  useLenis(); 
 
   return (
     <main className="text-white">
