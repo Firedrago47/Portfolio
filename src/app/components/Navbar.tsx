@@ -23,7 +23,7 @@ export default function Navbar() {
 
       const fadeTrigger = ScrollTrigger.create({
         trigger: document.body,
-        start: "top+=100 top",
+        start: "top+=50 top",
         onEnter: () =>
           gsap.to(left, { opacity: 0, duration: 0.3, ease: "power1.out" }),
         onLeaveBack: () =>
@@ -42,7 +42,7 @@ export default function Navbar() {
       ease: "power1.inOut",
     });
 
-    // ✅ Ensure proper refresh
+    // Ensure proper refresh
     const refresh = () => ScrollTrigger.refresh();
     window.addEventListener("resize", refresh);
     window.addEventListener("load", refresh);
@@ -64,7 +64,7 @@ export default function Navbar() {
     setMenuOpen(false);
   };
 
-  // ✅ Animate mobile menu
+  // Animate mobile menu
   useEffect(() => {
     if (!mobileMenuRef.current) return;
     gsap.to(mobileMenuRef.current, {
@@ -89,13 +89,19 @@ export default function Navbar() {
       {/* Center Nav (desktop only) */}
       <div
         ref={centerRef}
-        className="hidden md:flex sticky top-4 mr-128 z-50 bg-black/40 backdrop-blur-md rounded-full px-8 py-3 gap-6 shadow-md transition-shadow duration-300 font-alata"
+        className="hidden md:flex sticky top-4 mr-115 z-50 bg-black/40 backdrop-blur-md rounded-full px-8 py-3 gap-6 shadow-md transition-shadow duration-300 font-alata"
       >
         <button
           onClick={() => handleScroll("#about")}
           className="text-white hover:text-gray-300 transition cursor-pointer"
         >
           About
+        </button>
+        <button
+          onClick={() => handleScroll("#techstack")}
+          className="text-white hover:text-gray-300 transition cursor-pointer"
+        >
+          TechStack
         </button>
         <button
           onClick={() => handleScroll("#projects")}
