@@ -34,7 +34,7 @@ export default function TechStack() {
       : techStack.filter((tech) => tech.category === selectedCategory);
 
   return (
-    <section className="relative py-24 px-6 md:px-16 bg-transparent overflow-hidden">
+    <section id="techstack" className="relative py-24 px-6 md:px-16 bg-transparent overflow-hidden">
       {/* Subtle glowing orb background */}
       <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(2,0,36,1)_0%,transparent_70%)] animate-[spin_45s_linear_infinite] -translate-x-1/2 -translate-y-1/2"></div>
 

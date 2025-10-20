@@ -1,27 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Handshake, Mail, Send, X } from "lucide-react";
+import { Mail, Send, X } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { name, email, message } = form;
+  const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+  const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  ) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("Sending...");
-    setTimeout(() => {
-      setStatus("Message sent ✅");
+
+    try {
+      await emailjs.send(
+        serviceID,
+        templateID,
+        { from_name: name, from_email: email, message },
+        publicKey
+      );
+      setStatus("Message sent successfully!");
       setForm({ name: "", email: "", message: "" });
-    }, 1200);
+    } catch (err) {
+      console.error(err);
+      setStatus("Failed to send message.");
+    }
   };
 
   return (
@@ -51,17 +66,17 @@ const Contact = () => {
         <motion.button
           onClick={() => setShowForm(true)}
           className="relative group flex items-center justify-center w-16 h-16 rounded-full overflow-hidden 
-                    bg-gradient-to-br from-blue-500 to-purple-800 shadow-lg"
+                    bg-gradient-to-br from-blue-500 via-blue-800 to-purple-600 shadow-lg"
           whileHover={{
             scale: 1.1,
             rotate: 5,
-            boxShadow: "0 0 25px rgba(96,165,250,0.9)",
+            boxShadow: "0 0 8px rgba(96,165,250,0.9)",
           }}
           whileTap={{ scale: 0.95 }}
         >
           {/* Holographic Shimmer Overlay */}
           <motion.span
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-500 opacity-10 mix-blend-screen"
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-200 via-white to-white opacity-10 mix-blend-screen"
             style={{ backgroundSize: "200% 200%" }}
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -92,6 +107,7 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.98 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
+            ref={formRef}
             onSubmit={handleSubmit}
             className="relative w-full max-w-lg mt-1 p-[2px] rounded-3xl neon-border"
           >
@@ -102,28 +118,28 @@ const Contact = () => {
                   type="text"
                   name="name"
                   placeholder="Name"
-                  value={form.name}
+                  value={name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                  className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
-                  value={form.email}
+                  value={email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                  className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 />
                 <textarea
                   name="message"
                   placeholder="Message"
-                  value={form.message}
+                  value={message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
+                  className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
                 />
                 <div className="flex gap-4 mt-2">
                 {/* Send Button */}
@@ -177,7 +193,7 @@ const Contact = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mt-6 text-gray-300"
+          className="mt-6 text-gray-300 text-base font-alata"
         >
           {status}
         </motion.p>

@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.23.15",
     "gsap": "^3.13.0",
