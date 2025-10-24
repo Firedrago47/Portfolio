@@ -69,7 +69,7 @@ export default function About() {
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center h-full">
         <h1 className="text-4xl md:text-6xl font-alata mb-6 tracking-wide">
-          Deepan <span className="text-blue-500">Raj</span> S
+          DEEPAN <span className="text-blue-500">RAJ</span> S
         </h1>
 
         <p className="text-lg md:text-xl font-alata text-gray-200 max-w-2xl leading-relaxed mb-10">
