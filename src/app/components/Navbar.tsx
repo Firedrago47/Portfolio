@@ -2,149 +2,104 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
   const leftRef = useRef<HTMLDivElement>(null);
-  const centerRef = useRef<HTMLDivElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLogo, setShowLogo] = useState(true);
 
-  useEffect(() => {
-    const mm = gsap.matchMedia();
-
-    // Desktop fade animation using gsap.matchMedia
-    mm.add("(min-width: 768px)", () => {
-      const left = leftRef.current;
-      if (!left) return;
-
-      const fadeTrigger = ScrollTrigger.create({
-        trigger: document.body,
-        start: "top+=50 top",
-        onEnter: () =>
-          gsap.to(left, { opacity: 0, duration: 0.3, ease: "power1.out" }),
-        onLeaveBack: () =>
-          gsap.to(left, { opacity: 1, duration: 0.3, ease: "power1.out" }),
-      });
-
-      return () => fadeTrigger.kill();
-    });
-
-    // Center glow animation
-    const glowTween = gsap.to(centerRef.current, {
-      boxShadow: "0 0 6px 3px rgba(255,255,255,0.55)",
-      duration: 1,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-    });
-
-    // Ensure proper refresh
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", refresh);
-    window.addEventListener("load", refresh);
-
-    return () => {
-      mm.revert(); // cleanup matchMedia
-      glowTween.kill();
-      window.removeEventListener("resize", refresh);
-      window.removeEventListener("load", refresh);
-    };
-  }, []);
-
-  // Smooth scroll
+  // Scroll to section
   const handleScroll = (id: string) => {
     const target = document.querySelector(id);
     const lenis = (window as any).lenis;
-    if (target && lenis) lenis.scrollTo(target, { offset: -10 });
-    else target?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
+
+    if (target && lenis) {
+      lenis.scrollTo(target, { offset: -10 });
+    } else {
+      target?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    setMenuOpen(false); // Close mobile menu
   };
 
-  // Animate mobile menu
+  // Lock scroll when mobile menu is open
   useEffect(() => {
-    if (!mobileMenuRef.current) return;
-    gsap.to(mobileMenuRef.current, {
-      y: menuOpen ? 0 : "-100%",
-      opacity: menuOpen ? 1 : 0,
-      duration: 0.4,
-      ease: "power2.out",
-      pointerEvents: menuOpen ? "auto" : "none",
-    });
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
   }, [menuOpen]);
 
+  // IntersectionObserver for logo visibility
+  useEffect(() => {
+    const aboutSection = document.querySelector("#about");
+    if (!aboutSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowLogo(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+
+    observer.observe(aboutSection);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 sm:px-6 py-4 bg-transparent">
-      {/* Left Section (Logo) */}
-      <div
-        ref={leftRef}
-        className="text-xl font-alata cursor-pointer text-white transition-opacity duration-300"
-      >
-        MyPortfolio
-      </div>
+    <nav
+      className="fixed top-0 left-0 w-full z-50 px-6 py-4 select-none"
+      role="navigation"
+    >
+      <div className="flex items-center justify-between relative">
+        {/* Logo */}
+        <div
+          ref={leftRef}
+          className={`text-xl font-alata text-white cursor-pointer transition-opacity duration-300 ${
+            showLogo || menuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          }`}
+        >
+          MyPortfolio
+        </div>
 
-      {/* Center Nav (desktop only) */}
-      <div
-        ref={centerRef}
-        className="hidden md:flex sticky top-4 mr-115 z-50 bg-black/40 backdrop-blur-md rounded-full px-8 py-3 gap-6 shadow-md transition-shadow duration-300 font-alata"
-      >
-        <button
-          onClick={() => handleScroll("#about")}
-          className="text-white hover:text-gray-300 transition cursor-pointer"
-        >
-          About
-        </button>
-        <button
-          onClick={() => handleScroll("#techstack")}
-          className="text-white hover:text-gray-300 transition cursor-pointer"
-        >
-          TechStack
-        </button>
-        <button
-          onClick={() => handleScroll("#projects")}
-          className="text-white hover:text-gray-300 transition cursor-pointer"
-        >
-          Projects
-        </button>
-        <button
-          onClick={() => handleScroll("#contact")}
-          className="text-white hover:text-gray-300 transition cursor-pointer"
-        >
-          Contact
-        </button>
-      </div>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
+          <div className="bg-white/2 backdrop-blur-xl border border-white/10 shadow-lg rounded-full px-10 py-2 flex gap-6 font-alata transition-all duration-500">
+            <button onClick={() => handleScroll("#about")} className="cursor-pointer">About</button>
+            <button onClick={() => handleScroll("#projects")} className="cursor-pointer">Projects</button>
+            <button onClick={() => handleScroll("#contact")} className="cursor-pointer">Contact</button>
+          </div>
+        </div>
 
-      {/* Hamburger (mobile) */}
-      <div className="md:hidden flex items-center">
-        <button onClick={() => setMenuOpen((p) => !p)} className="text-white">
+        {/* Mobile Hamburger */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-white z-50"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+        >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div
-        ref={mobileMenuRef}
-        className="fixed top-0 left-0 w-full h-screen bg-black/80 backdrop-blur-md flex flex-col items-center justify-center gap-10 text-white font-alata text-lg z-40"
-        style={{ transform: "translateY(-100%)", opacity: 0 }}
+        className={`fixed top-0 left-0 w-full h-screen bg-black/85 backdrop-blur-md 
+          flex flex-col items-center justify-center gap-10 text-white 
+          font-alata text-2xl z-40 transition-transform duration-300 ease-in-out
+          ${menuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
       >
         <button
           onClick={() => handleScroll("#about")}
-          className="hover:text-gray-300 transition"
+          className="hover:text-blue-300"
         >
           About
         </button>
         <button
           onClick={() => handleScroll("#projects")}
-          className="hover:text-gray-300 transition"
+          className="hover:text-blue-300"
         >
           Projects
         </button>
         <button
           onClick={() => handleScroll("#contact")}
-          className="hover:text-gray-300 transition"
+          className="hover:text-blue-300"
         >
           Contact
         </button>
