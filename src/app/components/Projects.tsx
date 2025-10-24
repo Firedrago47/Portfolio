@@ -79,7 +79,7 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-grotesk mb-4 text-center"
+        className="text-2xl md:text-4xl font-bold uppercase mb-4 text-gray-200 text-center"
       >
         Projects
       </motion.h1>
@@ -94,7 +94,7 @@ export default function Projects() {
         A few of my featured works and experiments.
       </motion.p>
 
-      {/* ✳️ Responsive Grid */}
+      {/* Responsive Grid */}
       <motion.div
         variants={containerVariants}
         initial="hidden"

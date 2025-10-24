@@ -170,7 +170,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               </p>
               {item.type && (
                 <span
-                  className={`inline-block text-xs sm:text-sm font-semibold px-3 py-1 rounded-full border ${
+                  className={`inline-block text-xs sm:text-sm font-medium px-3 py-1 rounded-full border ${
                     item.type === "Education"
                       ? "text-emerald-400 border-emerald-500/20 bg-emerald-500/10"
                       : "text-blue-400 border-blue-500/20 bg-blue-500/10"
@@ -199,7 +199,7 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
               shadow-[0_0_8px_rgba(59,130,246,0.15)]
               text-gray-300 transition-all duration-300 hover:border-blue-500 hover:bg-gray-900 hover:text-white"
             >
-              <p className="text-sm sm:text-base md:text-base leading-tight font-alata">
+              <p className="text-sm sm:text-base md:text-base leading-tight font-medium">
                 {item.description}
               </p>
             </div>
