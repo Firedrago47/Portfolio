@@ -5,7 +5,9 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import HorizontalTimeline, { TimelineItem } from "./components/HorizontalTimeline";
+import HorizontalTimeline, {
+  TimelineItem,
+} from "./components/HorizontalTimeline";
 import TechStack from "./components/Techstack";
 
 const items: TimelineItem[] = [
@@ -33,14 +35,14 @@ const items: TimelineItem[] = [
 ];
 
 export default function Home() {
-  useLenis(); 
+  useLenis();
 
   return (
     <main className="text-white">
       <Navbar />
       <About />
       <HorizontalTimeline items={items} />
-      <TechStack/>
+      <TechStack />
       <Projects />
       <Contact />
     </main>

@@ -15,7 +15,6 @@ const Contact = () => {
   const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -142,47 +141,58 @@ const Contact = () => {
                   className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
                 />
                 <div className="flex gap-4 mt-2">
-                {/* Send Button */}
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  type="submit"
-                  className="relative flex items-center justify-center flex-1 px-6 py-3 rounded-lg shadow-lg overflow-hidden
+                  {/* Send Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    type="submit"
+                    className="relative flex items-center justify-center flex-1 px-6 py-3 rounded-lg shadow-lg overflow-hidden
                             bg-gradient-to-r from-blue-900 via-blue-800 to-blue-800"
-                >
-                  {/* Holographic Shimmer Overlay */}
-                  <motion.span
-                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 via-blue-400 to-gray-800 opacity-50 mix-blend-screen"
-                    style={{ backgroundSize: "200% 200%" }}
-                    animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  />
+                  >
+                    {/* Holographic Shimmer Overlay */}
+                    <motion.span
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 via-blue-400 to-gray-800 opacity-50 mix-blend-screen"
+                      style={{ backgroundSize: "200% 200%" }}
+                      animate={{
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
 
-                  {/* Icon */}
-                  <Send className="relative z-10 w-5 h-5 text-white" />
-                </motion.button>
+                    {/* Icon */}
+                    <Send className="relative z-10 w-5 h-5 text-white" />
+                  </motion.button>
 
-                {/* Cancel Button */}
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  type="button"
-                  onClick={() => setShowForm(false)}
-                  className="relative flex items-center justify-center px-6 py-3 rounded-lg border border-gray-600 overflow-hidden"
-                >
-                  {/* Holographic Shimmer Overlay */}
-                  <motion.span
-                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 to-zinc-800 opacity-40 mix-blend-screen"
-                    style={{ backgroundSize: "200% 200%" }}
-                    animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  />
+                  {/* Cancel Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="relative flex items-center justify-center px-6 py-3 rounded-lg border border-gray-600 overflow-hidden"
+                  >
+                    {/* Holographic Shimmer Overlay */}
+                    <motion.span
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 to-zinc-800 opacity-40 mix-blend-screen"
+                      style={{ backgroundSize: "200% 200%" }}
+                      animate={{
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
 
-                  {/* Icon */}
-                  <X className="relative z-10 w-5 h-5 text-gray-300 hover:text-white" />
-                </motion.button>
-              </div>
-
+                    {/* Icon */}
+                    <X className="relative z-10 w-5 h-5 text-gray-300 hover:text-white" />
+                  </motion.button>
+                </div>
               </div>
             </div>
           </motion.form>

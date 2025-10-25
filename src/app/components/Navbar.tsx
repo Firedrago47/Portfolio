@@ -62,9 +62,24 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
           <div className="bg-white/2 backdrop-blur-xl border border-white/10 shadow-lg rounded-full px-10 py-2 flex gap-6 font-alata transition-all duration-500">
-            <button onClick={() => handleScroll("#about")} className="cursor-pointer">About</button>
-            <button onClick={() => handleScroll("#projects")} className="cursor-pointer">Projects</button>
-            <button onClick={() => handleScroll("#contact")} className="cursor-pointer">Contact</button>
+            <button
+              onClick={() => handleScroll("#about")}
+              className="cursor-pointer"
+            >
+              About
+            </button>
+            <button
+              onClick={() => handleScroll("#projects")}
+              className="cursor-pointer"
+            >
+              Projects
+            </button>
+            <button
+              onClick={() => handleScroll("#contact")}
+              className="cursor-pointer"
+            >
+              Contact
+            </button>
           </div>
         </div>
 
@@ -83,7 +98,11 @@ export default function Navbar() {
         className={`fixed top-0 left-0 w-full h-screen bg-black/85 backdrop-blur-md 
           flex flex-col items-center justify-center gap-10 text-white 
           font-alata text-2xl z-40 transition-transform duration-300 ease-in-out
-          ${menuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+          ${
+            menuOpen
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0"
+          }`}
       >
         <button
           onClick={() => handleScroll("#about")}

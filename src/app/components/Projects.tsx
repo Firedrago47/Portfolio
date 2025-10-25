@@ -122,7 +122,9 @@ export default function Projects() {
               damping: 10,
               mass: 0.5,
             }}
-            className={`${project.size || ""} relative overflow-hidden group cursor-pointer ${
+            className={`${
+              project.size || ""
+            } relative overflow-hidden group cursor-pointer ${
               project.bg || `bg-gradient-to-br ${project.gradient}`
             } rounded-2xl p-5 sm:p-6 flex flex-col justify-between border border-white/5 hover:border-white/20 backdrop-blur-sm`}
           >

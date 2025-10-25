@@ -77,7 +77,10 @@ export default function About() {
           <span className="text-blue-500 font-mono">Full-Stack Developer</span>{" "}
           crafting smooth and modern digital experiences. My focus is building
           scalable apps, interactive UI/UX, and seamless performance using{" "}
-          <span className="text-blue-500 font-mono">React, Next.js, and Node.js</span>.
+          <span className="text-blue-500 font-mono">
+            React, Next.js, and Node.js
+          </span>
+          .
         </p>
 
         {/* Interactive Lucide Icons */}

@@ -19,7 +19,7 @@ export default function useLenis() {
     // Sync Lenis with ScrollTrigger
     function raf(time: number) {
       lenis.raf(time);
-      ScrollTrigger.update(); 
+      ScrollTrigger.update();
       requestAnimationFrame(raf);
     }
 

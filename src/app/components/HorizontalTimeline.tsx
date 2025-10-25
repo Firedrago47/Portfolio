@@ -25,110 +25,109 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
   const descRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-  const section = sectionRef.current;
-  const track = trackRef.current;
-  const glow = glowRef.current;
-  if (!section || !track || !glow) return;
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    const glow = glowRef.current;
+    if (!section || !track || !glow) return;
 
-  const itemWidth = 300; // smaller width for responsiveness
-  const totalItems = items.length;
-  const totalTrackWidth = track.scrollWidth;
-  const totalScroll = Math.max(0, totalTrackWidth - window.innerWidth);
+    const itemWidth = 300; // smaller width for responsiveness
+    const totalItems = items.length;
+    const totalTrackWidth = track.scrollWidth;
+    const totalScroll = Math.max(0, totalTrackWidth - window.innerWidth);
 
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-  // Horizontal scroll
-  gsap.to(track, {
-    x: () => -totalScroll,
-    ease: "none",
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: () => `+=${totalScroll}`,
-      scrub: 1,
-      pin: true,
-      anticipatePin: 1,
-    },
-  });
+    // Horizontal scroll
+    gsap.to(track, {
+      x: () => -totalScroll,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: () => `+=${totalScroll}`,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
 
-  // Beam animation
-  gsap.set(glow, { width: 0 });
-  gsap.to(glow, {
-    ease: "none",
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: () => `+=${totalScroll}`,
-      scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const beamMaxWidth = totalItems * itemWidth + window.innerWidth * 0.5;
-        const currentWidth = progress * beamMaxWidth;
-        gsap.set(glow, { width: currentWidth });
+    // Beam animation
+    gsap.set(glow, { width: 0 });
+    gsap.to(glow, {
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: () => `+=${totalScroll}`,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const beamMaxWidth = totalItems * itemWidth + window.innerWidth * 0.5;
+          const currentWidth = progress * beamMaxWidth;
+          gsap.set(glow, { width: currentWidth });
 
-        dotRefs.current.forEach((dot, idx) => {
-          const dotStart = (idx * itemWidth) / beamMaxWidth;
-          const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
+          dotRefs.current.forEach((dot, idx) => {
+            const dotStart = (idx * itemWidth) / beamMaxWidth;
+            const dotEnd = ((idx + 1) * itemWidth) / beamMaxWidth;
 
-          if (progress >= dotStart && progress < dotEnd) {
-            // Active dot 
-            gsap.to(dot, {
-              background: "radial-gradient(circle, #60a5fa, #2563eb)",
-              boxShadow: "0 0 6px 2px rgba(59,130,246,0.6)",
-              scale: 1.2,
-              duration: 0.2,
-              ease: "back.out(2)",
-            });
-
-            // Fade in the corresponding description 
-            const desc = descRefs.current[idx];
-            if (desc) {
-              gsap.to(desc, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power3.out",
+            if (progress >= dotStart && progress < dotEnd) {
+              // Active dot
+              gsap.to(dot, {
+                background: "radial-gradient(circle, #60a5fa, #2563eb)",
+                boxShadow: "0 0 6px 2px rgba(59,130,246,0.6)",
+                scale: 1.2,
+                duration: 0.2,
+                ease: "back.out(2)",
               });
-            }
-          } else if (progress < dotStart) {
-            //  Reset before it reaches
-            gsap.to(dot, {
-              background: "radial-gradient(circle, #6b7280, #374151)",
-              boxShadow: "none",
-              scale: 1,
-              duration: 0.3,
-              ease: "power2.out",
-            });
 
-            const desc = descRefs.current[idx];
-            if (desc) {
-              gsap.to(desc, {
-                opacity: 0,
-                y: 30,
-                duration: 0.6,
+              // Fade in the corresponding description
+              const desc = descRefs.current[idx];
+              if (desc) {
+                gsap.to(desc, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.6,
+                  ease: "power3.out",
+                });
+              }
+            } else if (progress < dotStart) {
+              //  Reset before it reaches
+              gsap.to(dot, {
+                background: "radial-gradient(circle, #6b7280, #374151)",
+                boxShadow: "none",
+                scale: 1,
+                duration: 0.3,
                 ease: "power2.out",
               });
+
+              const desc = descRefs.current[idx];
+              if (desc) {
+                gsap.to(desc, {
+                  opacity: 0,
+                  y: 30,
+                  duration: 0.6,
+                  ease: "power2.out",
+                });
+              }
             }
-          }
-        });
+          });
+        },
       },
-    },
-  });
+    });
 
-  // Initial hidden state for all descriptions
-  descRefs.current.forEach((desc) => {
-    gsap.set(desc, { opacity: 0, y: 30 });
-  });
+    // Initial hidden state for all descriptions
+    descRefs.current.forEach((desc) => {
+      gsap.set(desc, { opacity: 0, y: 30 });
+    });
 
-  const handleResize = () => ScrollTrigger.refresh();
-  window.addEventListener("resize", handleResize);
+    const handleResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", handleResize);
 
-  return () => {
-    window.removeEventListener("resize", handleResize);
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  };
-}, [items]);
-
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [items]);
 
   dotRefs.current = [];
   descRefs.current = [];
