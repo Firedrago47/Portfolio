@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import useLenis from "./hooks/useLenis";
 import Navbar from "./components/Navbar";
 import About from "./components/About";

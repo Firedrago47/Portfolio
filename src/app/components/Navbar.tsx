@@ -11,15 +11,14 @@ export default function Navbar() {
   // Scroll to section
   const handleScroll = (id: string) => {
     const target = document.querySelector(id);
-    const lenis = (window as any).lenis;
+    const lenis = window.lenis;
 
-    if (target && lenis) {
+    if (target instanceof HTMLElement && lenis) {
       lenis.scrollTo(target, { offset: -10 });
     } else {
       target?.scrollIntoView({ behavior: "smooth" });
     }
-
-    setMenuOpen(false); // Close mobile menu
+    setMenuOpen(false);
   };
 
   // Lock scroll when mobile menu is open

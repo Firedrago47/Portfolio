@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
@@ -14,20 +15,36 @@ export default function useLenis() {
       smoothWheel: true,
     });
 
-    (window as any).lenis = lenis;
+    window.lenis = lenis;
 
-    // Sync Lenis with ScrollTrigger
+    let rafId: number;
+
     function raf(time: number) {
       lenis.raf(time);
       ScrollTrigger.update();
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
+
+    // Pause Lenis & ScrollTrigger when tab hidden
+    function handleVisibility() {
+      if (document.hidden) {
+        lenis.stop();
+        ScrollTrigger.getAll().forEach((t) => t.disable());
+      } else {
+        lenis.start();
+        ScrollTrigger.getAll().forEach((t) => t.enable());
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
       lenis.destroy();
-      delete (window as any).lenis;
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      delete window.lenis;
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);

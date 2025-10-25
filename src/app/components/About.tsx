@@ -5,13 +5,14 @@ import { Download, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
 
 export default function About() {
   const handleScroll = (id: string) => {
-    const target = document.querySelector(id);
-    const lenis = (window as any).lenis;
-    if (target && lenis) {
-      lenis.scrollTo(target, { offset: -10 });
-    } else if (target) {
-      // fallback if lenis is not available
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.querySelector(id);
+
+    if (!el) return;
+
+    if (el instanceof HTMLElement && window.lenis) {
+      window.lenis.scrollTo(el, { offset: -10 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
