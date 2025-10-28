@@ -20,7 +20,7 @@ export default function About() {
     {
       id: 1,
       icon: <Download className="w-6 h-6" />,
-      href: "/resume.pdf",
+      href: "/Resume.pdf",
       title: "Download Resume",
       download: true,
       action: "download",
