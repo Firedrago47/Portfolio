@@ -137,6 +137,28 @@ export default function HorizontalTimeline({ items }: HorizontalTimelineProps) {
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-black to-neutral-950 text-white"
     >
+      {/* Grid pattern */}
+      <div className="absolute inset-0 -z-10 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#374151"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
       {/* Base Line */}
       <div className="absolute top-1/2 left-0 w-full h-[3px] bg-gray-700 z-10" />
 

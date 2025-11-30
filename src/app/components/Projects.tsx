@@ -71,8 +71,29 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 bg-neutral-950 text-white"
+      className="relative min-h-screen flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
     >
+      {/* Grid pattern */}
+      <div className="absolute inset-0 -z-10 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="section-grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#374151"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#section-grid)" />
+        </svg>
+      </div>
       {/* Heading */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
@@ -83,7 +104,6 @@ export default function Projects() {
       >
         Projects
       </motion.h1>
-
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +113,6 @@ export default function Projects() {
       >
         A few of my featured works and experiments.
       </motion.p>
-
       {/* Responsive Grid */}
       <motion.div
         variants={containerVariants}
@@ -128,7 +147,7 @@ export default function Projects() {
               project.bg || `bg-gradient-to-br ${project.gradient}`
             } rounded-2xl p-5 sm:p-6 flex flex-col justify-between border border-white/5 hover:border-white/20 backdrop-blur-sm`}
           >
-            {/* Default Content */}
+            {/* Card Content */}
             <div className="z-10 relative flex flex-col h-full justify-between group-hover:opacity-0 transition-opacity duration-500">
               <h2
                 className={`${
@@ -151,7 +170,7 @@ export default function Projects() {
               </span>
             </div>
 
-            {/* Hover Overlay (for desktop only) */}
+            {/* Hover Image */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out hidden sm:block">
               <Image
                 src={project.image}

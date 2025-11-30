@@ -192,6 +192,27 @@ export default function TechStack() {
       id="techstack"
       className="relative py-24 px-6 md:px-16 bg-transparent overflow-hidden"
     >
+      {/* Grid pattern */}
+      <div className="absolute inset-0 -z-10 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#374151"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
       {/* Subtle glowing orb background */}
       <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(2,0,36,1)_0%,transparent_70%)] animate-[spin_45s_linear_infinite] -translate-x-1/2 -translate-y-1/2"></div>
 
