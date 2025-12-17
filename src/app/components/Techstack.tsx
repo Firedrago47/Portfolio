@@ -42,14 +42,14 @@ const techStack = [
     name: "React",
     category: "Frontend",
     description: "Declarative UI library for building interactive interfaces",
-    color: "#61DAFB",
+    color: "#05bda7ff",
     experience: "1 year",
   },
   {
     name: "Next.js",
     category: "Frontend",
     description: "Full-stack React framework for dynamic and static web apps",
-    color: "#000000",
+    color: "#0064a2ff",
     experience: "1 year",
   },
   {
@@ -190,7 +190,7 @@ export default function TechStack() {
   return (
     <section
       id="techstack"
-      className="relative py-24 px-6 md:px-16 bg-transparent overflow-hidden"
+      className="min-h-screen relative py-24 px-6 md:px-16 bg-transparent overflow-hidden"
     >
       {/* Grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-20">
@@ -214,7 +214,7 @@ export default function TechStack() {
         </svg>
       </div>
       {/* Subtle glowing orb background */}
-      <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(2,0,36,1)_0%,transparent_70%)] animate-[spin_45s_linear_infinite] -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(2,0,36,1)_0%,transparent_70%)] animate-[spin_45s_linear_infinite] -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
