@@ -6,17 +6,17 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "Portfolio Website",
+    title: "Unified Ecommerce Platform",
     description:
-      "A personal portfolio built with Next.js, TailwindCSS, and Framer Motion.",
-    link: "#",
+      "An unified platform supporting food ordering, grocery delivery, taxi & cab booking.",
+    link: "",
     gradient: "from-zinc-900 to-blue-900",
     size: "md:col-span-2 md:row-span-2",
     textColor: "text-indigo-200 hover:text-white",
     images: ["/images/Gemines1.png", "/images/Gemines2.png"],
   },
   {
-    title: "E-Commerce App",
+    title: "DevSync – Collaborative Code Editor",
     description: "Full-stack MERN app with Stripe integration.",
     link: "#",
     bg: "bg-neutral-800",
@@ -24,15 +24,15 @@ const projects = [
     images: ["/images/Devsyncs1.png", "/images/Devsyncs2.png"],
   },
   {
-    title: "Chat Application",
-    description: "Realtime chat with WebSockets & Firebase.",
+    title: "ChainLabs – Blockchain-Based Scientific Research Platform",
+    description: "Designed a platform for transparent and immutable scientific research publishing using blockchain principles.",
     link: "#",
     bg: "bg-neutral-800",
     textColor: "text-indigo-400 hover:text-white",
     images: ["/images/Devsyncs2.png", "/images/Devsyncs1.png"],
   },
   {
-    title: "AI Image Generator",
+    title: "VibeTune – Music Streaming Application",
     description: "Next.js + OpenAI + Cloudinary.",
     link: "#",
     gradient: "from-gray-900 to-violet-900",
