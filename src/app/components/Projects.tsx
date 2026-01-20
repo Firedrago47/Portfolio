@@ -7,13 +7,12 @@ import Image from "next/image";
 const projects = [
   {
     title: "Unified Ecommerce Platform",
-    description:
-      "An unified platform supporting food ordering, grocery delivery, taxi & cab booking.",
-    link: "",
+    description:"An unified platform supporting food ordering, grocery delivery, taxi & cab booking.",
+    link: "https://full-stack-app-gzj8.vercel.app",
     gradient: "from-zinc-900 to-blue-900",
     size: "md:col-span-2 md:row-span-2",
     textColor: "text-indigo-200 hover:text-white",
-    images: ["/images/Gemines1.png", "/images/Gemines2.png"],
+    images: ["/images/full-stack-app1.png", "/images/full-stack-app2.png","/images/full-stack-app3.png"],
   },
   {
     title: "DevSync – Collaborative Code Editor",
@@ -21,7 +20,7 @@ const projects = [
     link: "#",
     bg: "bg-neutral-800",
     textColor: "text-indigo-400 hover:text-white",
-    images: ["/images/Devsyncs1.png", "/images/Devsyncs2.png"],
+    images: ["/images/devsync1.png", "/images/devsync2.png","/images/devsync3.png"],
   },
   {
     title: "ChainLabs – Blockchain-Based Scientific Research Platform",
@@ -122,15 +121,16 @@ export default function Projects() {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[200px] gap-4 sm:gap-6 [perspective:1200px]"
       >
         {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} />
+          <ProjectCard key={index} project={project} index={index} />
         ))}
       </motion.div>
     </section>
   );
 }
 
-function ProjectCard({ project }: { project: any }) {
+function ProjectCard({ project, index }: { project: any; index: number }) {
   const [imgIndex, setImgIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   // --- RANDOM ANIMATION LIST ---
   const animations = [
@@ -158,14 +158,17 @@ function ProjectCard({ project }: { project: any }) {
       initial: { opacity: 0, scale: 1.1 },
       animate: { opacity: 1, scale: 1 },
     },
-    
   ];
 
-  // Each card picks ONE random animation style at mount
+  // Use index-based animation to ensure consistent server/client rendering
   const randomAnim = React.useMemo(() => {
-    const idx = Math.floor(Math.random() * animations.length);
-    return animations[idx];
-  }, []); // runs once per card
+    return animations[index % animations.length];
+  }, [index]);
+
+  // Mark component as mounted (client-side only)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // AUTO-CYCLING
   useEffect(() => {
@@ -225,28 +228,30 @@ function ProjectCard({ project }: { project: any }) {
       </div>
 
       {/* AUTO-CYCLING, RANDOM-ANIMATED IMAGE */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden hidden sm:block">
-        <motion.div
-          key={imgIndex}
-          initial={randomAnim.initial}
-          animate={randomAnim.animate}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={project.images[imgIndex]}
-            alt={project.title}
-            fill
-            className="object-cover rounded-2xl brightness-95"
-          />
-        </motion.div>
+      {isMounted && (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden hidden sm:block">
+          <motion.div
+            key={imgIndex}
+            initial={randomAnim.initial}
+            animate={randomAnim.animate}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={project.images[imgIndex]}
+              alt={project.title}
+              fill
+              className="object-cover rounded-2xl brightness-95"
+            />
+          </motion.div>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent rounded-2xl flex flex-col justify-end p-6">
-          <h3 className="text-lg md:text-xl font-grotesk">{project.title}</h3>
-          <p className="text-gray-300 text-sm mt-2">{project.description}</p>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent rounded-2xl flex flex-col justify-end p-6">
+            <h3 className="text-lg md:text-xl font-grotesk">{project.title}</h3>
+            <p className="text-gray-300 text-sm mt-2">{project.description}</p>
+          </div>
         </div>
-      </div>
+      )}
     </motion.a>
   );
 }
