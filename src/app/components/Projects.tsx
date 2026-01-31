@@ -69,27 +69,6 @@ export default function Projects() {
       id="projects"
       className="relative min-h-screen flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
     >
-      {/* Background Grid */}
-      <div className="absolute inset-0 -z-10 opacity-20">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern
-              id="section-grid"
-              width="40"
-              height="40"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 40 0 L 0 0 0 40"
-                fill="none"
-                stroke="#374151"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#section-grid)" />
-        </svg>
-      </div>
 
       {/* Heading */}
       <motion.h1

@@ -38,13 +38,41 @@ export default function Home() {
   useLenis();
 
   return (
-    <main className="max-w-[1200] mx-auto px-5 text-white min-h-screen overflow-x-hidden">
-      <Navbar />
-      <About />
-      <HorizontalTimeline items={items} />
-      <TechStack />
-      <Projects />
-      <Contact />
+    <main className="relative min-h-screen overflow-x-hidden text-white">
+      
+      {/* FULL-WIDTH GRID BACKGROUND */}
+      <div className="absolute inset-0 -z-10 opacity-20 bg-black/50">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#374151"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      {/* CENTERED CONTENT */}
+      <div className="max-w-[1200px] mx-auto px-5">
+        <Navbar />
+        <About />
+        <HorizontalTimeline items={items} />
+        <TechStack />
+        <Projects />
+        <Contact />
+      </div>
+
     </main>
   );
 }
+
