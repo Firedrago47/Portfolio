@@ -38,7 +38,7 @@ export default function Home() {
   useLenis();
 
   return (
-    <main className="text-white">
+    <main className="max-w-[1200] mx-auto px-5 text-white min-h-screen overflow-x-hidden">
       <Navbar />
       <About />
       <HorizontalTimeline items={items} />
