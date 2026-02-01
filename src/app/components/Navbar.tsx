@@ -42,7 +42,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 w-full z-50 px-6 py-4 select-none"
+      className=" w-full z-50 px-6 py-4 select-none bg-black"
       role="navigation"
     >
       <div className="flex items-center justify-between relative">
