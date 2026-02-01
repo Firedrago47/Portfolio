@@ -190,7 +190,7 @@ export default function TechStack() {
   return (
     <section
       id="techstack"
-      className="min-h-screen relative py-24 px-6 md:px-16 bg-transparent overflow-hidden"
+      className="min-h-screen relative py-24 px-6 md:px-16 overflow-hidden"
     >
       {/* Grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-20">
