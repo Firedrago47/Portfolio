@@ -7,7 +7,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import HorizontalTimeline, {
   TimelineItem,
-} from "./components/HorizontalTimeline";
+} from "./components/VerticalTimeline";
 import TechStack from "./components/Techstack";
 
 const items: TimelineItem[] = [
@@ -39,9 +39,8 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden text-white">
-      
       {/* FULL-WIDTH GRID BACKGROUND */}
-      <div className="absolute inset-0 -z-10 opacity-20 bg-black/50">
+      <div className="absolute inset-0 -z-10 bg-black">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern
@@ -53,7 +52,7 @@ export default function Home() {
               <path
                 d="M 40 0 L 0 0 0 40"
                 fill="none"
-                stroke="#374151"
+                stroke="rgba(255,255,255,0.09)"
                 strokeWidth="1"
               />
             </pattern>
@@ -71,8 +70,6 @@ export default function Home() {
         <Projects />
         <Contact />
       </div>
-
     </main>
   );
 }
-
