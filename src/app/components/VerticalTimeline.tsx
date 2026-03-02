@@ -210,7 +210,7 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
                     // Card on the left
                     <div
                       ref={(el) => { cardRefs.current[idx] = el; }}
-                      className="w-full max-w-[360px] p-4 sm:p-5 rounded-xl
+                      className="w-full max-w-[480px] p-4 sm:p-5 rounded-xl
                         bg-white/5 backdrop-blur-sm border border-white/10
                         shadow-[0_0_8px_rgba(59,130,246,0.12)]
                         text-gray-400 transition-colors duration-300
@@ -238,7 +238,7 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
                     // Card on the right
                     <div
                       ref={(el) => { cardRefs.current[idx] = el; }}
-                      className="w-full max-w-[360px] p-4 sm:p-5 rounded-xl
+                      className="w-full max-w-[480px] p-4 sm:p-5 rounded-xl
                         bg-white/5 backdrop-blur-sm border border-white/10
                         shadow-[0_0_8px_rgba(59,130,246,0.12)]
                         text-gray-400 transition-colors duration-300

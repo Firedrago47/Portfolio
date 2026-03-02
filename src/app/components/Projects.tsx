@@ -76,7 +76,7 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         viewport={{ once: true }}
-        className="text-2xl md:text-4xl font-grotesk uppercase mb-4 text-gray-200 text-center"
+        className="text-4xl md:text-5xl font-grotesk uppercase mb-4 text-gray-200 text-center"
       >
         PROJECTS
       </motion.h1>
@@ -97,7 +97,7 @@ export default function Projects() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[200px] gap-4 sm:gap-6 [perspective:1200px]"
+        className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[200px] gap-4 sm:gap-6 [perspective:1200px]"
       >
         {projects.map((project, index) => (
           <ProjectCard key={index} project={project} index={index} />

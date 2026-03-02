@@ -96,7 +96,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative h-screen flex flex-col justify-center px-6 md:px-20 overflow-hidden text-white"
+      className="relative min-h-screen flex flex-col justify-start px-6 md:px-20 pt-24 md:pt-28 overflow-hidden text-white"
     >
       {/* Background Video */}
       <video
@@ -113,7 +113,7 @@ export default function About() {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content */}
-      <div className="relative z-10 ml-0 md:ml-20 flex flex-col justify-center h-full">
+      <div className="relative z-10 w-full max-w-6xl mx-auto mt-50 md:pl-8 flex flex-col">
         {/* Terminal typing intro */}
         <div className="font-mono text-sm md:text-base mb-4">
           <p className="text-xl mb-1 tracking-wide">
