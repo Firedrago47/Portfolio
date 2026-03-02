@@ -67,7 +67,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
+      className="relative flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
     >
 
       {/* Heading */}

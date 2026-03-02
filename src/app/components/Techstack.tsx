@@ -219,7 +219,7 @@ export default function TechStack() {
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <h2 className="text-5xl md:text-4xl font-grotesk bg-white bg-clip-text text-transparent uppercase tracking-wide">
+          <h2 className="text-4xl md:text-5xl font-grotesk bg-white bg-clip-text text-transparent uppercase tracking-wide">
             Tech <span className="text-blue-500">Stack</span>
           </h2>
           <p className="text-gray-400 max-w-l mx-auto mt-4 text-base font-mono">
