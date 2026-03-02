@@ -235,8 +235,8 @@ export default function TechStack() {
               onClick={() => setSelectedCategory(category)}
               className={`px-5 py-2 rounded-full border transition-all duration-300 text-sm font-mono ${
                 selectedCategory === category
-                  ? "bg-gradient-to-r from-blue-950 to-blue-600 text-white border-black scale-105 shadow-lg shadow-blue-500/10"
-                  : "border-gray-700 text-gray-400 hover:text-white hover:border-blue-500"
+                  ? "bg-gradient-to-r from-transparent to-blue-950 text-white border-blue-400 scale-105 shadow-lg shadow-blue-500/10"
+                  : "border-grey-700 text-gray-400 hover:text-white hover:border-blue-400"
               }`}
             >
               {category}
