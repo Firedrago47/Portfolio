@@ -76,9 +76,9 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         viewport={{ once: true }}
-        className="text-2xl md:text-4xl font-bold uppercase mb-4 text-gray-200 text-center"
+        className="text-2xl md:text-4xl font-grotesk uppercase mb-4 text-gray-200 text-center"
       >
-        Projects
+        PROJECTS
       </motion.h1>
 
       <motion.p
@@ -86,7 +86,7 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
         viewport={{ once: true }}
-        className="text-base sm:text-lg max-w-2xl text-center font-alata text-gray-300 mx-auto mb-10"
+        className="text-base sm:text-lg max-w-2xl text-center font-grotesk text-gray-300 mx-auto mb-10"
       >
         A few of my featured works and experiments.
       </motion.p>

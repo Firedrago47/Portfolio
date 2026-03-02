@@ -12,7 +12,7 @@ import TechStack from "./components/Techstack";
 
 const items: TimelineItem[] = [
   {
-    title: "HIGH SCHOOL EDUCATION",
+    title: "HIGH SCHOOL EDUCATION - COMPUTER SCIENCE",
     period: "2020 - 2022",
     description:
       "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming, technology, and creative problem-solving.",
@@ -22,7 +22,7 @@ const items: TimelineItem[] = [
     title: "BACHELOR OF COMPUTER SCIENCE AND DESIGN",
     period: "2022 - 2026",
     description:
-      "Graduated with a degree in Computer Science. Built a strong foundation in algorithms, data structures, and web development. Participated in hackathons and open-source contributions.",
+    "Graduated with a degree in Computer Science. Built a strong foundation in algorithms, data structures, and web development. Participated in hackathons and open-source contributions.",
     type: "Education",
   },
   {
@@ -32,6 +32,7 @@ const items: TimelineItem[] = [
       "Worked as a freelance frontend developer for small businesses and startups. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
     type: "Experience",
   },
+
 ];
 
 export default function Home() {
@@ -52,7 +53,7 @@ export default function Home() {
               <path
                 d="M 40 0 L 0 0 0 40"
                 fill="none"
-                stroke="rgba(255,255,255,0.09)"
+                stroke="rgba(255,255,255,0.2)"
                 strokeWidth="1"
               />
             </pattern>
@@ -62,7 +63,7 @@ export default function Home() {
       </div>
 
       {/* CENTERED CONTENT */}
-      <div className="max-w-[1200px] mx-auto px-5">
+      <div className="">
         <Navbar />
         <About />
         <HorizontalTimeline items={items} />
