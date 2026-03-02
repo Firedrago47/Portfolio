@@ -113,7 +113,7 @@ export default function About() {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto mt-50 md:pl-8 flex flex-col">
+      <div className="relative z-10 w-full max-w-5xl mx-auto mt-20 md:pl-12 flex flex-col">
         {/* Terminal typing intro */}
         <div className="font-mono text-sm md:text-base mb-4">
           <p className="text-xl mb-1 tracking-wide">
