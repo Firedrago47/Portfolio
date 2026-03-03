@@ -28,7 +28,7 @@ const projects = [
     link: "#",
     bg: "bg-neutral-800",
     textColor: "text-indigo-400 hover:text-white",
-    images: ["/images/Devsyncs2.png", "/images/Devsyncs1.png"],
+    images: ["/images/devsync2.png", "/images/devsync1.png"],
   },
   {
     title: "VibeTune – Music Streaming Application",

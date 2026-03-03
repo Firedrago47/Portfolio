@@ -104,7 +104,7 @@ export default function About() {
         muted
         loop
         playsInline
-        className="absolute top-0 left-0 w-full min-h-screen object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-center"
       >
         <source src="/videos/sample_vid.mp4" type="video/mp4" />
       </video>
@@ -155,10 +155,10 @@ export default function About() {
             className="text-lg md:text-xl font-alata text-gray-200 max-w-2xl leading-relaxed mb-10"
           >
             I’m a passionate{" "}
-            <span className="text-blue-500 font-mono">Full-Stack Developer</span>{" "}
+            <span className="text-blue-400 font-mono">Full-Stack Developer</span>{" "}
             crafting smooth and modern digital experiences. My focus is building
             scalable apps, interactive UI/UX, and seamless performance using{" "}
-            <span className="text-blue-500 font-mono">
+            <span className="text-blue-400 font-mono">
               React, Next.js, and Node.js
             </span>
             .

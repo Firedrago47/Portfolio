@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const techStack = [
-  // 🧠 Core Languages
+  // Core Languages
   {
     name: "C++",
     category: "Language",
@@ -18,7 +18,7 @@ const techStack = [
     category: "Language",
     description:
       "Robust OOP language for scalable apps and Android development",
-    color: "#F89820",
+    color: "#04a53cff",
     experience: "2 years",
   },
   {
@@ -37,7 +37,7 @@ const techStack = [
     experience: "2 years",
   },
 
-  // 🌐 Web & App Frameworks
+  //  Web & App Frameworks
   {
     name: "React",
     category: "Frontend",
@@ -60,7 +60,7 @@ const techStack = [
     experience: "1 year",
   },
 
-  // ⚙️ Backend & APIs
+  //  Backend & APIs
   {
     name: "Node.js",
     category: "Backend",
@@ -83,7 +83,7 @@ const techStack = [
     experience: "6 months",
   },
 
-  // 🗄️ Databases
+  //  Databases
   {
     name: "MySQL",
     category: "Database",
@@ -106,7 +106,7 @@ const techStack = [
     experience: "6 months",
   },
 
-  // 🧰 Tools & Workflow
+  //  Tools & Workflow
   {
     name: "Git & GitHub",
     category: "Tools",
@@ -129,7 +129,7 @@ const techStack = [
     experience: "2+ years",
   },
 
-  // 🚀 Deployment & Cloud
+  //  Deployment & Cloud
   {
     name: "Railway",
     category: "Deployment",
@@ -152,7 +152,9 @@ const techStack = [
     experience: "6 months",
   },
 
-  // 🎮 Game & System Development
+  // 
+
+  //  Game & System Development
   {
     name: "Unreal Engine",
     category: "Game Development",
@@ -190,7 +192,7 @@ export default function TechStack() {
   return (
     <section
       id="techstack"
-      className="relative py-24 px-6 md:px-16 overflow-hidden"
+      className="relative min-h-screen py-24 px-6 md:px-16 overflow-hidden"
     >
       {/* Grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-20">
@@ -220,7 +222,7 @@ export default function TechStack() {
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-grotesk bg-white bg-clip-text text-transparent uppercase tracking-wide">
-            Tech <span className="text-blue-500">Stack</span>
+            Tech <span className="text-blue-400">Stack</span>
           </h2>
           <p className="text-gray-400 max-w-l mx-auto mt-4 text-base font-mono">
             Crafting digital experiences with cutting-edge technologies and
@@ -236,7 +238,7 @@ export default function TechStack() {
               className={`px-5 py-2 rounded-full border transition-all duration-300 text-sm font-mono ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-transparent to-blue-950 text-white border-blue-400 scale-105 shadow-lg shadow-blue-500/10"
-                  : "border-grey-700 text-gray-400 hover:text-white hover:border-blue-400"
+                  : "border-grey-700 text-gray-400 hover:text-white hover:border-blue-400 cursor-pointer scale-100 hover:scale-105 hover:shadow-md hover:shadow-blue-500/5"
               }`}
             >
               {category}
