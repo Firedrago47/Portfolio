@@ -107,7 +107,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
+      className="relative flex flex-col mx-6 px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
     >
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
