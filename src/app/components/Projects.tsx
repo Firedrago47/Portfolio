@@ -1,82 +1,120 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import Image from "next/image";
 
-const projects = [
+type Project = {
+  title: string;
+  description: string;
+  link: string;
+  gradient?: string;
+  bg?: string;
+  images: string[];
+  accent: string;
+  stack: string[];
+};
+
+const projects: Project[] = [
   {
     title: "Unified Ecommerce Platform",
-    description:"An unified platform supporting food ordering, grocery delivery, taxi & cab booking.",
+    description:
+      "Unified platform for food ordering, grocery delivery, taxi and cab booking in a single workflow.",
     link: "https://full-stack-app-gzj8.vercel.app",
-    gradient: "from-zinc-900 to-blue-900",
-    size: "md:col-span-2 md:row-span-2",
-    textColor: "text-indigo-200 hover:text-white",
-    images: ["/images/full-stack-app1.png", "/images/full-stack-app2.png","/images/full-stack-app3.png"],
+    gradient: "from-zinc-900 via-slate-900 to-blue-900",
+    images: [
+      "/images/full-stack-app1.png",
+      "/images/full-stack-app2.png",
+      "/images/full-stack-app3.png",
+    ],
+    accent: "text-blue-200",
+    stack: ["Next.js", "Node.js", "MongoDB"],
   },
   {
-    title: "DevSync – Collaborative Code Editor",
-    description: "Full-stack MERN app with Stripe integration.",
+    title: "DevSync - Collaborative Code Editor",
+    description:
+      "Realtime collaborative editor with multiplayer sync, role-based spaces and deployment-ready architecture.",
     link: "#",
-    bg: "bg-neutral-800",
-    textColor: "text-indigo-400 hover:text-white",
-    images: ["/images/devsync1.png", "/images/devsync2.png","/images/devsync3.png"],
+    bg: "bg-zinc-900",
+    images: ["/images/devsync1.png", "/images/devsync2.png", "/images/devsync3.png"],
+    accent: "text-cyan-200",
+    stack: ["React", "Socket.io", "Express"],
   },
   {
-    title: "ChainLabs – Blockchain-Based Scientific Research Platform",
-    description: "Designed a platform for transparent and immutable scientific research publishing using blockchain principles.",
+    title: "ChainLabs - Scientific Research Platform",
+    description:
+      "Blockchain-aligned publishing system for transparent and immutable scientific research submissions.",
     link: "#",
-    bg: "bg-neutral-800",
-    textColor: "text-indigo-400 hover:text-white",
+    bg: "bg-zinc-900",
     images: ["/images/devsync2.png", "/images/devsync1.png"],
+    accent: "text-emerald-200",
+    stack: ["Next.js", "Solidity", "IPFS"],
   },
   {
-    title: "VibeTune – Music Streaming Application",
-    description: "Next.js + OpenAI + Cloudinary.",
+    title: "Gemine - Movie Streaming Application",
+    description:
+      "Modern movie experience with responsive UI, intelligent media layers and rich playback states.",
     link: "#",
-    gradient: "from-gray-900 to-violet-900",
-    size: "md:col-span-2",
-    textColor: "text-pink-100 hover:text-white",
+    gradient: "from-zinc-950 via-slate-900 to-indigo-900",
     images: ["/images/Gemines2.png", "/images/Gemines1.png"],
+    accent: "text-violet-200",
+    stack: ["Next.js", "TypeScript", "Cloudinary"],
+  },
+  {
+    title: "VibeTune - Music Streaming Application",
+    description:
+      "Modern music experience with responsive UI, intelligent media layers and rich playback states.",
+    link: "#",
+    gradient: "from-zinc-950 via-slate-900 to-indigo-900",
+    images: ["/images/Gemines2.png", "/images/Gemines1.png"],
+    accent: "text-violet-200",
+    stack: ["Next.js", "TypeScript", "Prisma"],
+  },
+  {
+    title: "Scripts - Music Streaming Application",
+    description:
+      "Modern music experience with responsive UI, intelligent media layers and rich playback states.",
+    link: "#",
+    gradient: "from-zinc-950 via-slate-900 to-indigo-900",
+    images: ["/images/Gemines2.png", "/images/Gemines1.png"],
+    accent: "text-violet-200",
+    stack: ["Next.js", "TypeScript", "Prisma"],
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 80,
-    rotateX: 15,
-    scale: 0.9,
-    transformPerspective: 1200,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    scale: 1,
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+function getProjectHighlights(title: string) {
+  if (title.includes("Ecommerce")) return ["Multi-service workflow", "Role-based user flows", "Realtime order tracking"];
+  if (title.includes("DevSync")) return ["Collaborative editing", "Session-based rooms", "Low-latency sync"];
+  if (title.includes("ChainLabs")) return ["Immutable records", "Transparent publishing", "Research-first UX"];
+  return ["Modern media UX", "Smart recommendation flow", "Scalable frontend architecture"];
+}
 
 export default function Projects() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const getSpan = (index: number) => {
+    if (activeIndex === null) {
+      return index === 0 || index === 3
+        ? "md:col-span-2 md:row-span-2"
+        : "md:col-span-2 md:row-span-1";
+    }
+
+    return activeIndex === index
+      ? "md:col-span-4 md:row-span-2"
+      : "md:col-span-2 md:row-span-1";
+  };
+
   return (
     <section
       id="projects"
       className="relative flex flex-col px-4 sm:px-8 md:px-16 py-12 md:py-16 text-white overflow-hidden"
     >
-
-      {/* Heading */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.35 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-grotesk uppercase mb-4 text-gray-200 text-center"
+        className="text-4xl md:text-5xl uppercase mb-4 text-gray-200 text-center"
       >
         PROJECTS
       </motion.h1>
@@ -84,153 +122,181 @@ export default function Projects() {
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
+        transition={{ duration: 0.45, delay: 0.1 }}
         viewport={{ once: true }}
-        className="text-base sm:text-lg max-w-2xl text-center font-grotesk text-gray-300 mx-auto mb-10"
+        className="text-base sm:text-lg max-w-2xl text-center text-gray-300 mx-auto mb-10"
       >
-        A few of my featured works and experiments.
+        Hover a project card to expand it and inspect details.
       </motion.p>
 
-      {/* GRID */}
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[200px] gap-4 sm:gap-6 [perspective:1200px]"
+        layout
+        onMouseLeave={() => setActiveIndex(null)}
+        className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[210px] gap-4 sm:gap-6"
       >
         {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} index={index} />
+          <ProjectCard
+            key={project.title}
+            project={project}
+            isActive={activeIndex === index}
+            className={getSpan(index)}
+            onActivate={() => setActiveIndex(index)}
+          />
         ))}
       </motion.div>
     </section>
   );
 }
 
-function ProjectCard({ project, index }: { project: any; index: number }) {
+function ProjectCard({
+  project,
+  isActive,
+  className,
+  onActivate,
+}: {
+  project: Project;
+  isActive: boolean;
+  className: string;
+  onActivate: () => void;
+}) {
   const [imgIndex, setImgIndex] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
+  const highlights = useMemo(() => getProjectHighlights(project.title), [project.title]);
+  const contentVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
+    exit: { opacity: 0, transition: { duration: 0.2 } },
+  };
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } },
+  };
 
-  // --- RANDOM ANIMATION LIST ---
-  const animations = [
-    { // Fade
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-    },
-    { // Slide Left
-      initial: { opacity: 0, x: 40 },
-      animate: { opacity: 1, x: 0 },
-    },
-    { // Slide Right
-      initial: { opacity: 0, x: -40 },
-      animate: { opacity: 1, x: 0 },
-    },
-    { // Slide Up
-      initial: { opacity: 0, y: 40 },
-      animate: { opacity: 1, y: 0 },
-    },
-    { // Slide Down
-      initial: { opacity: 0, y: -40 },
-      animate: { opacity: 1, y: 0 },
-    },
-    { // Zoom
-      initial: { opacity: 0, scale: 1.1 },
-      animate: { opacity: 1, scale: 1 },
-    },
-  ];
-
-  // Use index-based animation to ensure consistent server/client rendering
-  const randomAnim = React.useMemo(() => {
-    return animations[index % animations.length];
-  }, [index]);
-
-  // Mark component as mounted (client-side only)
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // AUTO-CYCLING
-  useEffect(() => {
-    if (!project.images || project.images.length <= 1) return;
-
+    if (project.images.length <= 1) return;
     const interval = setInterval(() => {
       setImgIndex((prev) => (prev + 1) % project.images.length);
-    }, 5000);
-
+    }, 2800);
     return () => clearInterval(interval);
   }, [project.images]);
 
+  const imageSrc = useMemo(() => project.images[imgIndex], [project.images, imgIndex]);
+
   return (
     <motion.a
-      variants={cardVariants}
+      layout
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ transformStyle: "preserve-3d" }}
-      whileHover={{
-        scale: 1.03,
-        rotateX: 2,
-        rotateY: -2,
-        boxShadow: "0 0 8px rgba(147,197,253,0.25)",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-        mass: 0.5,
-      }}
-      className={`${
-        project.size || ""
-      } relative overflow-hidden group cursor-pointer ${
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+      transition={{ layout: { type: "spring", stiffness: 180, damping: 26, mass: 0.9 } }}
+      className={`${className} relative isolate overflow-hidden rounded-2xl border border-white/10 ${
         project.bg || `bg-gradient-to-br ${project.gradient}`
-      } rounded-2xl p-5 sm:p-6 flex flex-col justify-between border border-white/5 hover:border-white/20 backdrop-blur-sm`}
+      } p-5 sm:p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)]`}
     >
-      {/* STATIC CARD CONTENT */}
-      <div className="z-10 relative flex flex-col h-full justify-between group-hover:opacity-0 transition-opacity duration-500">
-        <h2
-          className={`${
-            project.size ? "text-2xl" : "text-lg sm:text-xl"
-          } font-grotesk mb-2`}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_45%)]" />
+
+      {!isActive && (
+      <motion.div
+        layout
+        className={`relative z-10 flex h-full flex-col ${isActive ? "md:w-[52%]" : "w-full"}`}
         >
-          {project.title}
-        </h2>
-        <p
-          className={`${
-            project.gradient ? "text-gray-200" : "text-gray-400"
-          } text-sm`}
-        >
+        <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">Featured Project</p>
+        <h2 className="text-lg sm:text-xl leading-tight text-white">{project.title}</h2>
+        <p className={`mt-3 text-xs sm:text-sm leading-relaxed ${isActive ? "text-gray-200" : "text-gray-300"}`}>
           {project.description}
         </p>
-        <span className={`mt-auto font-medium ${project.textColor}`}>
-          View Project →
-        </span>
-      </div>
-
-      {/* AUTO-CYCLING, RANDOM-ANIMATED IMAGE */}
-      {isMounted && (
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden hidden sm:block">
-          <motion.div
-            key={imgIndex}
-            initial={randomAnim.initial}
-            animate={randomAnim.animate}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={project.images[imgIndex]}
-              alt={project.title}
-              fill
-              className="object-cover rounded-2xl brightness-95"
-            />
-          </motion.div>
-
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent rounded-2xl flex flex-col justify-end p-6">
-            <h3 className="text-lg md:text-xl font-grotesk">{project.title}</h3>
-            <p className="text-gray-300 text-sm mt-2">{project.description}</p>
+          <div className="mt-5 flex items-center gap-2">
+            {project.stack.slice(0, 2).map((tech) => (
+              <span
+                key={`${project.title}-stack-${tech}`}
+                className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] text-gray-200"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
+        <div className="mt-auto pt-6">
+          <span className={`inline-flex items-center gap-2 text-sm sm:text-base ${project.accent}`}>
+            Open project
+            <span aria-hidden="true">↗</span>
+          </span>
         </div>
-      )}
+      </motion.div>
+        )}
+
+      <AnimatePresence mode="wait">
+        {isActive && (
+          <motion.div
+            key={`${project.title}-expanded-shell`}
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="absolute inset-0 hidden md:flex"
+          >
+            <motion.div
+              variants={itemVariants}
+              className="w-[45%] h-full p-6 lg:p-8 bg-black/45 backdrop-blur-[1.5px] flex flex-col"
+            >
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400">Project Details</p>
+              <h3 className="mt-2 text-2xl lg:text-3xl leading-tight text-white">{project.title}</h3>
+              <p className="mt-3 text-sm lg:text-base leading-relaxed text-gray-200">{project.description}</p>
+
+              <div className="mt-5 grid grid-cols-1 gap-2">
+                {highlights.map((point) => (
+                  <div key={`${project.title}-${point}`} className="flex items-center gap-2 text-sm text-gray-200">
+                    <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
+                    <span>{point}</span>
+                  </div>
+                ))}
+              </div>
+
+              <span className={`mt-auto inline-flex items-center gap-2 text-sm ${project.accent}`}>
+                View full project <span aria-hidden="true">↗</span>
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="relative w-[55%] h-full border-l border-white/10">
+              <div className="absolute inset-2 rounded-lg overflow-hidden border border-white/10">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={imageSrc}
+                    initial={{ opacity: 0, scale: 1.06, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 1.02, filter: "blur(2px)" }}
+                    transition={{ duration: 0.52, ease: "easeInOut" }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={imageSrc}
+                      alt={`${project.title} preview`}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-l from-black/10 via-black/35 to-black/75" />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <div className="absolute left-5 bottom-5 flex items-center gap-1.5">
+                {project.images.map((_, idx) => (
+                  <span
+                    key={`${project.title}-dot-${idx}`}
+                    className={`h-1.5 rounded-full transition-all duration-700 ${
+                      idx === imgIndex ? "w-5 bg-white" : "w-2 bg-white/40"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <div className="absolute right-5 bottom-5 rounded-md bg-black/65 border border-white/15 px-2.5 py-1 text-[11px] text-gray-100">
+                Preview
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.a>
   );
 }

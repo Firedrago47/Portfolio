@@ -79,25 +79,25 @@ export default function Navbar() {
         >
           <button
             onClick={() => handleScroll("about")}
-            className="hover:text-blue-300"
+            className="hover:text-blue-400"
           >
             About
           </button>
           <button
             onClick={() => handleScroll("projects")}
-            className="hover:text-blue-300"
+            className="hover:text-blue-400"
           >
             Projects
           </button>
           <button
             onClick={() => handleScroll("techstack")}
-            className="hover:text-blue-300"
+            className="hover:text-blue-400"
           >
             Tech Stack
           </button>
           <button
             onClick={() => handleScroll("contact")}
-            className="hover:text-blue-300"
+            className="hover:text-blue-400  "
           >
             Contact
           </button>
@@ -112,7 +112,7 @@ export default function Navbar() {
           isAboutVisible ? "opacity-0 pointer-events-none -translate-x-4" : "opacity-100"
         }`}
       >
-        <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-black/50 backdrop-blur-md p-2 shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
+        <div className="flex flex-col gap-3 rounded-xl border border-white/15 bg-black/50 backdrop-blur-md p-1 shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
           {dockItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -121,7 +121,7 @@ export default function Navbar() {
                 onClick={() => handleScroll(item.id)}
                 title={item.label}
                 aria-label={item.label}
-                className="group relative flex h-11 w-11 items-center justify-center rounded-xl text-gray-300 transition-all duration-200 hover:bg-white/10 hover:text-blue-300"
+                className="group relative flex h-11 w-11 items-center justify-center rounded-xl text-gray-300 transition-all duration-200 cursor-pointer hover:bg-white/2 hover:text-blue-400"
               >
                 <Icon size={20} />
                 <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
