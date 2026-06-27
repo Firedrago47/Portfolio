@@ -8,8 +8,9 @@ const TERMINAL_COMMAND = "whoami";
 const IDENTITIES = [
   "DEEPAN RAJ S",
   "Full-Stack Developer",
-  "Frontend Engineer",
-  "Problem Solver",
+  "Security Operations Engineer",
+  "Cloud and Security Enthusiast",
+  "Linux and DevOps Learner",
 ];
 
 export default function About() {
@@ -117,7 +118,13 @@ export default function About() {
         {/* Terminal typing intro */}
         <div className="font-mono text-sm md:text-base mb-4">
           <p className="text-xl mb-1 tracking-wide">
-            <span className="text-blue-400">root@deepan</span>:~$ {commandText}
+            <span className="group relative inline-flex cursor-help text-blue-400">
+              root@deepan
+              <span className="pointer-events-none absolute left-0 bottom-full mb-2 rounded-md border border-blue-400/30 bg-black/80 px-2 py-1 text-xs text-blue-200 opacity-0 shadow-lg shadow-blue-950/30 transition-opacity duration-200 group-hover:opacity-100">
+                yes, I use Arch btw
+              </span>
+            </span>
+            :~$ {commandText}
             {!commandDone && <span className="animate-pulse">|</span>}
           </p>
         </div>
@@ -152,16 +159,28 @@ export default function About() {
                 setParagraphEntered(true);
               }
             }}
-            className="text-lg md:text-xl font-alata text-gray-200 max-w-2xl leading-relaxed mb-10"
+            className="text-lg md:text-xl font-alata text-gray-200 max-w-4xl leading-relaxed mb-10"
           >
-            I’m a passionate{" "}
-            <span className="text-blue-400 font-mono">Full-Stack Developer</span>{" "}
-            crafting smooth and modern digital experiences. My focus is building
-            scalable apps, interactive UI/UX, and seamless performance using{" "}
+            I started with a{" "}
             <span className="text-blue-400 font-mono">
-              React, Next.js, and Node.js
-            </span>
-            .
+              full-stack development
+            </span>{" "}
+            background, and now I&apos;m focusing more seriously on{" "}
+            <span className="text-blue-400 font-mono">
+              cloud and security.
+            </span>{" "}
+            I&apos;m currently interning at{" "}
+            <span className="text-blue-400 font-mono">
+              Xiotz Private Limited,
+            </span>{" "}
+            where I&apos;m building hands-on experience in monitoring,
+            incident response, and Linux-based security workflows. I also enjoy
+            development and like building applications with{" "}
+            <span className="text-blue-400 font-mono">
+              TypeScript, React, Next.js, Node.js, and PostgreSQL,
+            </span>{" "}
+            which gives me a strong developer foundation while I keep growing
+            toward a long-term career in cloud and security.
           </motion.p>
         )}
 
