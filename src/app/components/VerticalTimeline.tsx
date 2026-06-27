@@ -168,7 +168,6 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
             maskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
           }}
         />
-
         {/* ── Items ── */}
         <div className="relative z-30 flex flex-col gap-34 sm:gap-42">
           {items.map((item, idx) => {
@@ -226,7 +225,7 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
                   <div
                     ref={(el) => { dotRefs.current[idx] = el; }}
                     data-timeline-dot
-                    className="w-4 h-4 sm:w-5 sm:h-5 rounded-full relative z-30 flex-shrink-0"
+                    className="relative z-30 h-4 w-4 flex-shrink-0 rounded-full sm:h-5 sm:w-5"
                     style={{ background: "radial-gradient(circle, #6b7280, #374151)" }}
                     aria-hidden="true"
                   />

@@ -32,6 +32,13 @@ const items: TimelineItem[] = [
       "Worked as a freelance frontend developer for small businesses and startups. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
     type: "Experience",
   },
+  {
+    title: "SECURITY OPERATIONS ENGINEER INTERN - XIOTZ PRIVATE LIMITED",
+    period: "2026 - Present",
+    description:
+      "Currently interning at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
+    type: "Experience",
+  },
 
 ];
 
