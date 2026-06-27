@@ -1,184 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-
-const techStack = [
-  // Core Languages
-  {
-    name: "C++",
-    category: "Language",
-    description:
-      "High-performance, low-level control for game and system development",
-    color: "#00599C",
-    experience: "3 years",
-  },
-  {
-    name: "Java",
-    category: "Language",
-    description:
-      "Robust OOP language for scalable apps and Android development",
-    color: "#04a53cff",
-    experience: "2 years",
-  },
-  {
-    name: "Python",
-    category: "Language",
-    description:
-      "Versatile scripting language for automation, AI, and backend systems",
-    color: "#3776AB",
-    experience: "2 years",
-  },
-  {
-    name: "TypeScript",
-    category: "Language",
-    description: "Strongly typed JavaScript for scalable codebases",
-    color: "#3178c6",
-    experience: "2 years",
-  },
-
-  //  Web & App Frameworks
-  {
-    name: "React",
-    category: "Frontend",
-    description: "Declarative UI library for building interactive interfaces",
-    color: "#05bda7ff",
-    experience: "1 year",
-  },
-  {
-    name: "Next.js",
-    category: "Frontend",
-    description: "Full-stack React framework for dynamic and static web apps",
-    color: "#0064a2ff",
-    experience: "1 year",
-  },
-  {
-    name: "Express.js",
-    category: "Backend",
-    description: "Minimal Node.js framework for REST APIs and web servers",
-    color: "#444444",
-    experience: "1 year",
-  },
-
-  //  Backend & APIs
-  {
-    name: "Node.js",
-    category: "Backend",
-    description: "JavaScript runtime for scalable network applications",
-    color: "#339933",
-    experience: "1 year",
-  },
-  {
-    name: "Spring Boot",
-    category: "Backend",
-    description: "Java-based framework for microservices and enterprise apps",
-    color: "#6DB33F",
-    experience: "6 months",
-  },
-  {
-    name: "FastAPI",
-    category: "Backend",
-    description: "Modern Python web framework for high-performance APIs",
-    color: "#009688",
-    experience: "6 months",
-  },
-
-  //  Databases
-  {
-    name: "MySQL",
-    category: "Database",
-    description: "Relational database with ACID compliance",
-    color: "#4479A1",
-    experience: "2 years",
-  },
-  {
-    name: "PostgreSQL",
-    category: "Database",
-    description: "Advanced SQL database with strong data integrity features",
-    color: "#336791",
-    experience: "1 year",
-  },
-  {
-    name: "Redis",
-    category: "Database",
-    description: "In-memory data store for caching and real-time operations",
-    color: "#DC382D",
-    experience: "6 months",
-  },
-
-  //  Tools & Workflow
-  {
-    name: "Git & GitHub",
-    category: "Tools",
-    description: "Version control and collaboration platform",
-    color: "#181717",
-    experience: "2 years",
-  },
-  {
-    name: "Docker",
-    category: "Tools",
-    description: "Containerization for consistent app environments",
-    color: "#2496ED",
-    experience: "6 months",
-  },
-  {
-    name: "VS Code",
-    category: "Tools",
-    description: "Lightweight yet powerful development environment",
-    color: "#007ACC",
-    experience: "2+ years",
-  },
-
-  //  Deployment & Cloud
-  {
-    name: "Railway",
-    category: "Deployment",
-    description: "Developer-friendly cloud deployment platform",
-    color: "#64748b",
-    experience: "1 year",
-  },
-  {
-    name: "Vercel",
-    category: "Deployment",
-    description: "Serverless deployment for frontend frameworks",
-    color: "#000000",
-    experience: "1 year",
-  },
-  {
-    name: "AWS",
-    category: "Deployment",
-    description: "Cloud infrastructure platform with wide service range",
-    color: "#FF9900",
-    experience: "6 months",
-  },
-
-  // 
-
-  //  Game & System Development
-  {
-    name: "Unreal Engine",
-    category: "Game Development",
-    description: "AAA-level game engine powered by C++",
-    color: "#0E1128",
-    experience: "1 year",
-  },
-  {
-    name: "Pygame",
-    category: "Game Development",
-    description: "Simple Python library for 2D game prototypes",
-    color: "#306998",
-    experience: "1 year",
-  },
-];
-
-const categories = [
-  "Frontend",
-  "Backend",
-  "Database",
-  "Tools",
-  "Deployment",
-  "Language",
-];
+import {
+  techStack,
+  techStackCategories,
+  type TechStackItem,
+} from "../data/techStack";
 
 export default function TechStack() {
   const [selectedCategory, setSelectedCategory] = useState("Frontend");
@@ -187,7 +15,9 @@ export default function TechStack() {
   const filteredTech =
     selectedCategory === "All"
       ? techStack
-      : techStack.filter((tech) => tech.category === selectedCategory);
+      : techStack.filter(
+          (tech: TechStackItem) => tech.category === selectedCategory,
+        );
 
   return (
     <section
@@ -225,13 +55,13 @@ export default function TechStack() {
             Tech <span className="text-blue-400">Stack</span>
           </h2>
           <p className="text-gray-400 max-w-l mx-auto mt-4 text-base font-mono">
-            Crafting digital experiences with cutting-edge technologies and
-            modern development practices.
+            Building modern digital experiences with full-stack engineering and
+            security operations practices.
           </p>
         </div>
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
+          {techStackCategories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
