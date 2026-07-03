@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { GithubIcon } from "lucide-react";
 
 type Project = {
   title: string;
@@ -50,36 +51,6 @@ const projects: Project[] = [
     accent: "text-emerald-200",
     stack: ["Next.js", "Solidity", "IPFS"],
   },
-  {
-    title: "Gemine - Movie Streaming Application",
-    description:
-      "Modern movie experience with responsive UI, intelligent media layers and rich playback states.",
-    link: "#",
-    gradient: "from-zinc-950 via-slate-900 to-indigo-900",
-    images: ["/images/Gemines2.png", "/images/Gemines1.png"],
-    accent: "text-violet-200",
-    stack: ["Next.js", "TypeScript", "Cloudinary"],
-  },
-  {
-    title: "VibeTune - Music Streaming Application",
-    description:
-      "Modern music experience with responsive UI, intelligent media layers and rich playback states.",
-    link: "#",
-    gradient: "from-zinc-950 via-slate-900 to-indigo-900",
-    images: ["/images/Gemines2.png", "/images/Gemines1.png"],
-    accent: "text-violet-200",
-    stack: ["Next.js", "TypeScript", "Prisma"],
-  },
-  {
-    title: "Scripts - Music Streaming Application",
-    description:
-      "Modern music experience with responsive UI, intelligent media layers and rich playback states.",
-    link: "#",
-    gradient: "from-zinc-950 via-slate-900 to-indigo-900",
-    images: ["/images/Gemines2.png", "/images/Gemines1.png"],
-    accent: "text-violet-200",
-    stack: ["Next.js", "TypeScript", "Prisma"],
-  },
 ];
 
 function getProjectHighlights(title: string) {
@@ -91,17 +62,61 @@ function getProjectHighlights(title: string) {
 
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const githubProfile = "https://github.com/Firedrago47";
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearHoverTimeout = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+  };
+
+  const queueActivation = (index: number) => {
+    clearHoverTimeout();
+    if (index === 0) {
+      setActiveIndex(index);
+      return;
+    }
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveIndex(index);
+      hoverTimeoutRef.current = null;
+    }, 1000);
+  };
+
+  useEffect(() => {
+    return () => clearHoverTimeout();
+  }, []);
 
   const getSpan = (index: number) => {
     if (activeIndex === null) {
-      return index === 0 || index === 3
+      return index === 0
         ? "md:col-span-2 md:row-span-2"
         : "md:col-span-2 md:row-span-1";
     }
 
-    return activeIndex === index
-      ? "md:col-span-4 md:row-span-2"
-      : "md:col-span-2 md:row-span-1";
+    if (activeIndex === 0) {
+      return index === 0
+        ? "md:col-span-4 md:row-span-2 md:col-start-1 md:row-start-1"
+        : index === 1
+          ? "md:col-span-2 md:row-span-1 md:col-start-1 md:row-start-3"
+          : "md:col-span-2 md:row-span-1 md:col-start-3 md:row-start-3";
+    }
+
+    if (activeIndex === 1) {
+      return index === 0
+        ? "md:col-span-2 md:row-span-1 md:col-start-1 md:row-start-1"
+        : index === 1
+          ? "md:col-span-4 md:row-span-2 md:col-start-1 md:row-start-2"
+          : "md:col-span-2 md:row-span-1 md:col-start-3 md:row-start-1";
+    }
+
+    return index === 0
+      ? "md:col-span-2 md:row-span-1 md:col-start-1 md:row-start-1"
+      : index === 1
+        ? "md:col-span-2 md:row-span-1 md:col-start-3 md:row-start-1"
+        : "md:col-span-4 md:row-span-2 md:col-start-1 md:row-start-2";
   };
 
   return (
@@ -131,7 +146,10 @@ export default function Projects() {
 
       <motion.div
         layout
-        onMouseLeave={() => setActiveIndex(null)}
+        onMouseLeave={() => {
+          clearHoverTimeout();
+          setActiveIndex(null);
+        }}
         className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[210px] gap-4 sm:gap-6"
       >
         {projects.map((project, index) => (
@@ -140,9 +158,31 @@ export default function Projects() {
             project={project}
             isActive={activeIndex === index}
             className={getSpan(index)}
-            onActivate={() => setActiveIndex(index)}
+            onActivate={() => queueActivation(index)}
+            onFocusActivate={() => {
+              clearHoverTimeout();
+              setActiveIndex(index);
+            }}
           />
         ))}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.15 }}
+        viewport={{ once: true }}
+        className="mt-10 flex justify-center"
+      >
+        <a
+          href={githubProfile}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-500/10 px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] text-blue-200 transition hover:border-blue-300 hover:bg-blue-500/20 hover:text-white"
+        >
+          More on GitHub
+          <GithubIcon className="h-4 w-4" />
+        </a>
       </motion.div>
     </section>
   );
@@ -153,11 +193,13 @@ function ProjectCard({
   isActive,
   className,
   onActivate,
+  onFocusActivate,
 }: {
   project: Project;
   isActive: boolean;
   className: string;
   onActivate: () => void;
+  onFocusActivate: () => void;
 }) {
   const [imgIndex, setImgIndex] = useState(0);
   const highlights = useMemo(() => getProjectHighlights(project.title), [project.title]);
@@ -188,7 +230,7 @@ function ProjectCard({
       target="_blank"
       rel="noopener noreferrer"
       onMouseEnter={onActivate}
-      onFocus={onActivate}
+      onFocus={onFocusActivate}
       transition={{ layout: { type: "spring", stiffness: 180, damping: 26, mass: 0.9 } }}
       className={`${className} relative isolate overflow-hidden rounded-2xl border border-white/10 ${
         project.bg || `bg-gradient-to-br ${project.gradient}`
@@ -253,7 +295,7 @@ function ProjectCard({
               </div>
 
               <span className={`mt-auto inline-flex items-center gap-2 text-sm ${project.accent}`}>
-                View full project <span aria-hidden="true">↗</span>
+                View full project <span aria-hidden="true"><GithubIcon className="h-4 w-4" /></span>
               </span>
             </motion.div>
 
