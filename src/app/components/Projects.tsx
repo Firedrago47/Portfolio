@@ -18,6 +18,25 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "CloudGuard - Cloud Security Dashboard",
+    description:
+      "CloudGuard is a comprehensive cloud security dashboard that provides real-time monitoring, threat detection, and compliance management for cloud infrastructures.",
+    link: "https://github.com/Firedrago47/CloudGuard-back",
+    bg: "bg-zinc-900",
+    images: ["/images/cloudguard1.png", "/images/cloudguard2.png"],
+    accent: "text-emerald-200",
+    stack: ["AWS","Next.js", "Python"],
+  },
+  {
+    title: "DevSync - Collaborative Code Editor",
+    description:"Realtime collaborative editor with multiplayer sync, role-based spaces and deployment-ready architecture.",
+    link: "https://devsync-teal.vercel.app",
+    bg: "bg-zinc-900",
+    images: ["/images/devsync1.png", "/images/devsync2.png", "/images/devsync3.png"],
+    accent: "text-cyan-200",
+    stack: ["Next.js", "TypeScript","Express.js", "Websockets", "Supabase", ],
+  },
+  {
     title: "Unified Ecommerce Platform",
     description:
       "Unified platform for food ordering, grocery delivery, taxi and cab booking in a single workflow.",
@@ -29,27 +48,7 @@ const projects: Project[] = [
       "/images/full-stack-app3.png",
     ],
     accent: "text-blue-200",
-    stack: ["Next.js", "Node.js", "MongoDB"],
-  },
-  {
-    title: "DevSync - Collaborative Code Editor",
-    description:
-      "Realtime collaborative editor with multiplayer sync, role-based spaces and deployment-ready architecture.",
-    link: "#",
-    bg: "bg-zinc-900",
-    images: ["/images/devsync1.png", "/images/devsync2.png", "/images/devsync3.png"],
-    accent: "text-cyan-200",
-    stack: ["React", "Socket.io", "Express"],
-  },
-  {
-    title: "ChainLabs - Scientific Research Platform",
-    description:
-      "Blockchain-aligned publishing system for transparent and immutable scientific research submissions.",
-    link: "#",
-    bg: "bg-zinc-900",
-    images: ["/images/devsync2.png", "/images/devsync1.png"],
-    accent: "text-emerald-200",
-    stack: ["Next.js", "Solidity", "IPFS"],
+    stack: ["Next.js", "TypeScript", "postgreSQL"],
   },
 ];
 
