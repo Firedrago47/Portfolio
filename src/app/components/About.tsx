@@ -107,11 +107,11 @@ export default function About() {
         playsInline
         className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-center"
       >
-        <source src="/videos/sample_vid.mp4" type="video/mp4" />
+        <source src="/videos/ascii-magic-1.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/60" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-5xl mx-auto mt-20 md:pl-12 flex flex-col">
