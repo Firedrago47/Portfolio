@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, User, Layers3, FolderKanban, Mail } from "lucide-react";
+import {
+  Menu,
+  X,
+  User,
+  Layers3,
+  FolderKanban,
+  Mail,
+  Trophy,
+} from "lucide-react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +18,7 @@ export default function Navbar() {
   const dockItems = [
     { id: "about", label: "About", icon: User },
     { id: "techstack", label: "Tech Stack", icon: Layers3 },
+    { id: "certifications", label: "Certifications", icon: Trophy },
     { id: "projects", label: "Projects", icon: FolderKanban },
     { id: "contact", label: "Contact", icon: Mail },
   ];
@@ -94,6 +103,12 @@ export default function Navbar() {
             className="hover:text-blue-400"
           >
             Tech Stack
+          </button>
+          <button
+            onClick={() => handleScroll("certifications")}
+            className="hover:text-blue-400"
+          >
+            Certifications
           </button>
           <button
             onClick={() => handleScroll("contact")}

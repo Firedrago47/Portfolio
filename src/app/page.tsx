@@ -9,6 +9,7 @@ import HorizontalTimeline, {
   TimelineItem,
 } from "./components/VerticalTimeline";
 import TechStack from "./components/Techstack";
+import Certifications from "./components/Certifications";
 
 const items: TimelineItem[] = [
   {
@@ -75,6 +76,7 @@ export default function Home() {
         <About />
         <HorizontalTimeline items={items} />
         <TechStack />
+        <Certifications />
         <Projects />
         <Contact />
       </div>
