@@ -36,7 +36,7 @@ const items: TimelineItem[] = [
     title: "SECURITY OPERATIONS ENGINEER INTERN - XIOTZ PRIVATE LIMITED",
     period: "2026 - Present",
     description:
-      "Currently interning at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
+      "Interned at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
     type: "Experience",
   },
 
