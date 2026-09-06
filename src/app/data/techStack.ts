@@ -211,11 +211,11 @@ export const techStack: TechStackItem[] = [
 ];
 
 export const techStackCategories = [
+  "Security Operations",
   "Frontend",
   "Backend",
   "Database",
-  "Tools",
   "Deployment",
-  "Security Operations",
+  "Tools",
   "Language",
 ];

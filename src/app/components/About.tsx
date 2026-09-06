@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
+import { Eye, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
 
 const TERMINAL_COMMAND = "whoami";
 const IDENTITIES = [
@@ -65,11 +65,10 @@ export default function About() {
   const icons = [
     {
       id: 1,
-      icon: <Download className="w-6 h-6" />,
+      icon: <Eye className="w-6 h-6" />,
       href: "/Resume.pdf",
-      title: "Download Resume",
-      download: true,
-      action: "download",
+      title: "View Resume",
+      action: "view",
     },
     {
       id: 2,
@@ -224,15 +223,14 @@ export default function About() {
               );
             }
 
-            // other icons (download / external links)
+            // resume and external links
             return (
               <motion.a
                 key={item.id}
                 href={item.href}
                 title={item.title}
-                download={item.download}
-                target={item.action === "link" ? "_blank" : undefined}
-                rel={item.action === "link" ? "noopener noreferrer" : undefined}
+                target={item.action === "link" || item.action === "view" ? "_blank" : undefined}
+                rel={item.action === "link" || item.action === "view" ? "noopener noreferrer" : undefined}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 },

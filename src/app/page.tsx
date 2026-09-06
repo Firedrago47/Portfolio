@@ -16,7 +16,7 @@ const items: TimelineItem[] = [
     title: "HIGH SCHOOL EDUCATION - COMPUTER SCIENCE",
     period: "2020 - 2022",
     description:
-      "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming, technology, and creative problem-solving.",
+      "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming and technology.",
     type: "Education",
   },
   {
@@ -30,14 +30,14 @@ const items: TimelineItem[] = [
     title: "SOFTWARE DEVELOPER (Freelance)",
     period: "2023 - Present",
     description:
-      "Worked as a freelance frontend developer for small businesses and startups. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
+      "Worked as a freelance full-stack developer for small businesses and startups with friends. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
     type: "Experience",
   },
   {
     title: "SECURITY OPERATIONS ENGINEER INTERN - XIOTZ PRIVATE LIMITED",
     period: "2026 - Present",
     description:
-      "Currently interning at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
+      "Interned at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh and Linux fundamentals. My Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
     type: "Experience",
   },
 

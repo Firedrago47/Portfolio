@@ -2,63 +2,48 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Award,
-  Cloud,
-  ShieldCheck,
-  type LucideIcon,
+  Badge,
 } from "lucide-react";
-import Badge from "./Badge";
 
 const tabs = [
   { id: "certifications", label: "Certifications", icon: Award },
-  { id: "badges", label: "Badges", icon: Cloud },
+  { id: "badges", label: "Badges", icon: Badge },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
 
 type BadgeData = {
-  icon: LucideIcon;
   title: string;
   subtitle?: string;
   color: string;
+  document?: string;
 };
 
 const certifications: BadgeData[] = [
   {
-    icon: Cloud,
     title: "AWS Certified AI Practitioner",
     subtitle: "Amazon Web Services",
-    color: "#FF9900",
+    color: "#005295",
+    document: "/certifications/aws-ai-practitioner.pdf",
   },
   {
-    icon: Cloud,
     title: "AWS Certified Cloud Practitioner",
     subtitle: "Amazon Web Services",
-    color: "#FF9900",
+    color: "#005295",
+    document: "/certifications/aws-cloud-practitioner.pdf",
   },
   {
-    icon: ShieldCheck,
     title: "AWS Security Specialty",
     subtitle: "In progress",
     color: "#7C3AED",
   },
 ];
 
-const certificationBadges: BadgeData[] = [
-  {
-    icon: Cloud,
-    title: "Credly Badge",
-    subtitle: "AWS Verified Credential",
-    color: "#FF9900",
-  },
-];
-
 export default function Certifications() {
   const [activeTab, setActiveTab] = useState<TabId>("certifications");
-
-  const activeData =
-    activeTab === "certifications" ? certifications : certificationBadges;
 
   return (
     <section
@@ -125,52 +110,63 @@ export default function Certifications() {
 
         {activeTab === "certifications" && (
           <div className="max-w-3xl mx-auto space-y-4">
-            {activeData.map((badge, index) => (
+            {certifications.map((certificate, index) => (
               <motion.div
-                key={badge.title}
+                key={certificate.title}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 viewport={{ once: true }}
                 className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm"
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: `${badge.color}22`, color: badge.color }}
-                  >
-                    <badge.icon size={22} />
-                  </div>
-                  <div>
+                <div className="flex items-center gap-8">
+
+                  <div className="flex flex-col ml-2">
                     <h3 className="text-lg font-semibold text-white">
-                      {badge.title}
+                      {certificate.title}
                     </h3>
-                    <p className="text-sm text-gray-400">{badge.subtitle}</p>
+                    <p className="text-sm text-gray-400">{certificate.subtitle}</p>
                   </div>
                 </div>
 
-                <span className="rounded-full border border-blue-400/30 bg-blue-500/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.18em] text-blue-300">
-                  {badge.title.includes("In progress") ? "In Progress" : "Certified"}
-                </span>
+                {certificate.document ? (
+                  <a
+                    href={certificate.document}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="shrink-0 rounded-full border border-blue-400/30 bg-blue-500/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.18em] text-blue-300 transition-colors hover:border-blue-300 hover:text-white"
+                  >
+                    View certificate
+                  </a>
+                ) : (
+                  <span className="shrink-0 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.18em] text-amber-300">
+                    In progress
+                  </span>
+                )}
               </motion.div>
             ))}
           </div>
         )}
 
         {activeTab === "badges" && (
-          <div className="flex min-h-[260px] items-center justify-center mt-8">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-              <div
-                data-iframe-width="150"
-                data-iframe-height="270"
-                data-share-badge-id="a424ff4f-32a1-4c0c-9f7c-3b1c0535361f"
-                data-share-badge-host="https://www.credly.com"
-              ></div>
-              <script
-                type="text/javascript"
-                async
-                src="//cdn.credly.com/assets/utilities/embed.js"
-              ></script>
+          <div className="flex min-h-[300px] gap-8 items-center justify-center mt-8">
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+              <Image
+                src="/images/badges/cloud.jpeg"
+                alt="AWS Cloud Practitioner badge"
+                width={300}
+                height={300}
+                className="h-auto w-[180px] object-contain"
+              />
+            </div>
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+              <Image
+                src="/images/badges/AI.jpeg"
+                alt="AWS Cloud Practitioner badge"
+                width={300}
+                height={300}
+                className="h-auto w-[180px] object-contain"
+              />
             </div>
           </div>
         )}
