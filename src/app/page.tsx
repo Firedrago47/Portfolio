@@ -27,17 +27,24 @@ const items: TimelineItem[] = [
     type: "Education",
   },
   {
-    title: "SOFTWARE DEVELOPER (Freelance)",
-    period: "2023 - Present",
+    title: "FULL-STACK DEVELOPMENT EXPERIENCE",
+    period: "Previous experience",
     description:
-      "Worked as a freelance full-stack developer for small businesses and startups with friends. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
+      "Built applications and websites with React, Next.js, Node.js, and Tailwind CSS. This experience gave me a strong foundation in software development, system thinking, and practical problem solving.",
     type: "Experience",
   },
   {
     title: "SECURITY OPERATIONS ENGINEER INTERN - XIOTZ PRIVATE LIMITED",
-    period: "MAY-2026 - JUL-2026",
+    period: "MAY 2026 - JUL 2026",
     description:
-      "Interned at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh and Linux fundamentals. My Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
+      "Previously gained practical exposure to security monitoring, incident response, Wazuh, and Linux fundamentals as a Security Operations Engineer intern.",
+    type: "Experience",
+  },
+  {
+    title: "SEEKING SECURITY & CLOUD OPPORTUNITIES",
+    period: "Current focus",
+    description:
+      "Currently seeking opportunities in security operations, cloud security, and related entry-level roles. Building deeper skills in detection engineering, Linux, cloud platforms, and secure systems.",
     type: "Experience",
   },
 
