@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
+import { Eye, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
 
 const TERMINAL_COMMAND = "whoami";
 const IDENTITIES = [
   "DEEPAN RAJ S",
-  "Full-Stack Developer",
-  "Security Operations Engineer",
-  "Cloud and Security Enthusiast",
-  "Linux and DevOps Learner",
+  "Aspiring Security Operations Engineer",
+  "Cloud Security Enthusiast",
+  "Incident Response Learner",
+  "Open to Opportunities",
 ];
 
 export default function About() {
@@ -65,11 +65,10 @@ export default function About() {
   const icons = [
     {
       id: 1,
-      icon: <Download className="w-6 h-6" />,
+      icon: <Eye className="w-6 h-6" />,
       href: "/Resume.pdf",
-      title: "Download Resume",
-      download: true,
-      action: "download",
+      title: "View Resume",
+      action: "view",
     },
     {
       id: 2,
@@ -161,26 +160,20 @@ export default function About() {
             }}
             className="text-lg md:text-xl font-alata text-gray-200 max-w-4xl leading-relaxed mb-10"
           >
-            I started with a{" "}
+            I&apos;m currently seeking opportunities in{" "}
+            <span className="text-blue-400 font-mono">
+              security operations and cloud security.
+            </span>{" "}
+            I previously gained practical exposure to monitoring, incident
+            response, and Linux-based security workflows during an internship
+            as a Security Operations Engineer. I&apos;m interested in detection
+            engineering and building reliable systems that are secure by
+            design. My earlier experience in{" "}
             <span className="text-blue-400 font-mono">
               full-stack development
             </span>{" "}
-            background, and now I&apos;m focusing more seriously on{" "}
-            <span className="text-blue-400 font-mono">
-              cloud and security.
-            </span>{" "}
-            I&apos;m currently interning at{" "}
-            <span className="text-blue-400 font-mono">
-              Xiotz Private Limited,
-            </span>{" "}
-            where I&apos;m building hands-on experience in monitoring,
-            incident response, and Linux-based security workflows. I also enjoy
-            development and like building applications with{" "}
-            <span className="text-blue-400 font-mono">
-              TypeScript, React, Next.js, Node.js, and PostgreSQL,
-            </span>{" "}
-            which gives me a strong developer foundation while I keep growing
-            toward a long-term career in cloud and security.
+            with TypeScript, React, Next.js, Node.js, and PostgreSQL gives me
+            a practical engineering foundation for this direction.
           </motion.p>
         )}
 
@@ -224,15 +217,14 @@ export default function About() {
               );
             }
 
-            // other icons (download / external links)
+            // resume and external links
             return (
               <motion.a
                 key={item.id}
                 href={item.href}
                 title={item.title}
-                download={item.download}
-                target={item.action === "link" ? "_blank" : undefined}
-                rel={item.action === "link" ? "noopener noreferrer" : undefined}
+                target={item.action === "link" || item.action === "view" ? "_blank" : undefined}
+                rel={item.action === "link" || item.action === "view" ? "noopener noreferrer" : undefined}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 },

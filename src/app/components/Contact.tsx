@@ -20,6 +20,17 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (name.trim().length < 2 || name.length > 100) {
+      setStatus("Please enter a valid name.");
+      return;
+    }
+
+    if (email.length > 254 || message.trim().length < 10 || message.length > 5000) {
+      setStatus("Please check your email and message length.");
+      return;
+    }
+
     setStatus("Sending...");
 
     try {
@@ -143,6 +154,7 @@ const Contact = () => {
                   placeholder="Name"
                   value={name}
                   onChange={handleChange}
+                  maxLength={100}
                   required
                   className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 />
@@ -152,6 +164,7 @@ const Contact = () => {
                   placeholder="Email"
                   value={email}
                   onChange={handleChange}
+                  maxLength={254}
                   required
                   className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 />
@@ -160,6 +173,7 @@ const Contact = () => {
                   placeholder="Message"
                   value={message}
                   onChange={handleChange}
+                  maxLength={5000}
                   required
                   rows={5}
                   className="w-full px-4 py-3 font-alata rounded-lg bg-neutral-800/60 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"

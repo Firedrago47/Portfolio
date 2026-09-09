@@ -16,7 +16,7 @@ const items: TimelineItem[] = [
     title: "HIGH SCHOOL EDUCATION - COMPUTER SCIENCE",
     period: "2020 - 2022",
     description:
-      "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming, technology, and creative problem-solving.",
+      "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming and technology.",
     type: "Education",
   },
   {
@@ -28,16 +28,23 @@ const items: TimelineItem[] = [
   },
   {
     title: "SOFTWARE DEVELOPER (Freelance)",
-    period: "2023 - 2025",
+    period: "2023 - Present",
     description:
-      "Worked as a freelance frontend developer for small businesses and startups. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
+      "Built applications and websites with React, Next.js, Node.js, and Tailwind CSS. This experience gave me a strong foundation in software development, system thinking, and practical problem solving.",
     type: "Experience",
   },
   {
     title: "SECURITY OPERATIONS ENGINEER INTERN - XIOTZ PRIVATE LIMITED",
-    period: "2026 - Present",
+    period: "MAY 2026 - JUL 2026",
     description:
-      "Interned at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
+      "Previously gained practical exposure to security monitoring, incident response, Wazuh, and Linux fundamentals as a Security Operations Engineer intern.",
+    type: "Experience",
+  },
+  {
+    title: "SEEKING SECURITY & CLOUD OPPORTUNITIES",
+    period: "Current focus",
+    description:
+      "Currently interning at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
     type: "Experience",
   },
 
