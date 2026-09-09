@@ -27,7 +27,7 @@ const items: TimelineItem[] = [
     type: "Education",
   },
   {
-    title: "SOFTWARE DEVELOPER (Freelance)",
+    title: "FULL-STACK DEVELOPMENT",
     period: "2023 - Present",
     description:
       "Built applications and websites with React, Next.js, Node.js, and Tailwind CSS. This experience gave me a strong foundation in software development, system thinking, and practical problem solving.",

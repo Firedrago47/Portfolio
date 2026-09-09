@@ -9,7 +9,7 @@ import {
 } from "../data/techStack";
 
 export default function TechStack() {
-  const [selectedCategory, setSelectedCategory] = useState("Frontend");
+  const [selectedCategory, setSelectedCategory] = useState("Security Operations");
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
   const filteredTech =
