@@ -28,7 +28,7 @@ const items: TimelineItem[] = [
   },
   {
     title: "SOFTWARE DEVELOPER (Freelance)",
-    period: "2023 - Present",
+    period: "2023 - 2025",
     description:
       "Worked as a freelance frontend developer for small businesses and startups. Designed and developed responsive websites using React, Next.js, and Tailwind CSS, focusing on user experience and performance.",
     type: "Experience",
