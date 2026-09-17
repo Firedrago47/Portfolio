@@ -1,13 +1,3 @@
-import Lenis from "@studio-freight/lenis";
-
 declare module "react-pdf/dist/Page/AnnotationLayer.css";
 declare module "react-pdf/dist/Page/TextLayer.css";
 declare module "*.css";
-
-declare global {
-  interface Window {
-    lenis?: Lenis;
-  }
-}
-
-export {};

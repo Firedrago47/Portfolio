@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import {
-  Award,
-  Badge,
-} from "lucide-react";
+import { Award, Badge } from "lucide-react";
+import PdfViewer from "./PdfViewer";
 
 const tabs = [
   { id: "certifications", label: "Certifications", icon: Award },
@@ -44,6 +42,7 @@ const certifications: BadgeData[] = [
 
 export default function Certifications() {
   const [activeTab, setActiveTab] = useState<TabId>("certifications");
+  const [selectedPdf, setSelectedPdf] = useState<{ src: string; title: string } | null>(null);
 
   return (
     <section
@@ -130,14 +129,13 @@ export default function Certifications() {
                 </div>
 
                 {certificate.document ? (
-                  <a
-                    href={certificate.document}
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPdf({ src: certificate.document!, title: certificate.title })}
                     className="shrink-0 rounded-full border border-blue-400/30 bg-blue-500/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.18em] text-blue-300 transition-colors hover:border-blue-300 hover:text-white"
                   >
                     View certificate
-                  </a>
+                  </button>
                 ) : (
                   <span className="shrink-0 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.18em] text-amber-300">
                     In progress
@@ -171,6 +169,15 @@ export default function Certifications() {
           </div>
         )}
       </div>
+
+      {selectedPdf && (
+        <PdfViewer
+          src={selectedPdf.src}
+          title={selectedPdf.title}
+          isOpen={Boolean(selectedPdf)}
+          onClose={() => setSelectedPdf(null)}
+        />
+      )}
     </section>
   );
 }

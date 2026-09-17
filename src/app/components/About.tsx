@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, Mail, GithubIcon, LinkedinIcon } from "lucide-react";
+import PdfViewer from "./PdfViewer";
 
 const TERMINAL_COMMAND = "whoami";
 const IDENTITIES = [
@@ -19,6 +20,7 @@ export default function About() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [titleEntered, setTitleEntered] = useState(false);
   const [paragraphEntered, setParagraphEntered] = useState(false);
+  const [pdfOpen, setPdfOpen] = useState(false);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -66,9 +68,10 @@ export default function About() {
     {
       id: 1,
       icon: <Eye className="w-6 h-6" />,
-      href: "/Resume.pdf",
+      href: "/resume/Deepan_Raj_S_SECV.pdf",
       title: "View Resume",
       action: "view",
+      onClick: () => setPdfOpen(true),
     },
     {
       id: 2,
@@ -87,7 +90,7 @@ export default function About() {
     {
       id: 4,
       icon: <LinkedinIcon className="w-6 h-6" />,
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://www.linkedin.com/in/deepan-raj-s-220400351",
       title: "LinkedIn",
       action: "link",
     },
@@ -218,13 +221,34 @@ export default function About() {
             }
 
             // resume and external links
-            return (
+            return item.action === "view" ? (
+              <motion.button
+                key={item.id}
+                type="button"
+                title={item.title}
+                onClick={item.onClick}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                whileHover={{
+                  scale: 1.2,
+                  rotate: 5,
+                  color: "#60A5FA",
+                  filter: "drop-shadow(0 0 8px rgba(96,165,250,0.8))",
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                className="cursor-pointer text-gray-300 hover:text-blue-400 transition"
+              >
+                {item.icon}
+              </motion.button>
+            ) : (
               <motion.a
                 key={item.id}
                 href={item.href}
                 title={item.title}
-                target={item.action === "link" || item.action === "view" ? "_blank" : undefined}
-                rel={item.action === "link" || item.action === "view" ? "noopener noreferrer" : undefined}
+                target={item.action === "link" ? "_blank" : undefined}
+                rel={item.action === "link" ? "noopener noreferrer" : undefined}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 },
@@ -244,6 +268,13 @@ export default function About() {
           })}
         </motion.div>
       </div>
+
+      <PdfViewer
+        src="/resume/Deepan_Raj_S_SECV.pdf"
+        title="Resume"
+        isOpen={pdfOpen}
+        onClose={() => setPdfOpen(false)}
+      />
     </section>
   );
 }
