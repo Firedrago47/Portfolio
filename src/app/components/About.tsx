@@ -163,20 +163,22 @@ export default function About() {
             }}
             className="text-lg md:text-xl font-alata text-gray-200 max-w-4xl leading-relaxed mb-10"
           >
-            I&apos;m currently seeking opportunities in{" "}
+            I&apos;m targeting{" "}
             <span className="text-blue-400 font-mono">
-              security operations and cloud security.
+              Security Operations Engineer and Cloud Security
             </span>{" "}
-            I previously gained practical exposure to monitoring, incident
-            response, and Linux-based security workflows during an internship
-            as a Security Operations Engineer. I&apos;m interested in detection
-            engineering and building reliable systems that are secure by
-            design. My earlier experience in{" "}
+            roles, and my internship experience in {" "}
             <span className="text-blue-400 font-mono">
-              full-stack development
+              incident response, alert triage and Linux-based security workflows
             </span>{" "}
-            with TypeScript, React, Next.js, Node.js, and PostgreSQL gives me
-            a practical engineering foundation for this direction.
+            has given me a strong foundation in operational security. I&apos;m especially strong in{" "}
+            <span className="text-blue-400 font-mono">
+              Python
+            </span>{" and "}
+            <span className="text-blue-400 font-mono">
+              Bash
+            </span>{" "}
+            for automating investigations and building practical security tooling.
           </motion.p>
         )}
 
