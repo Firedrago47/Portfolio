@@ -1,6 +1,9 @@
 "use client";
 
+import { ClosedCaption } from "lucide-react";
 import { useEffect, useState } from "react";
+import { GiExitDoor } from "react-icons/gi";
+import { RxExit } from "react-icons/rx";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
@@ -92,13 +95,13 @@ export default function PdfViewer({ src, title, isOpen, onClose }: PdfViewerProp
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-5xl rounded-2xl border border-white/10 bg-[#0b1020] shadow-2xl shadow-blue-950/50">
-        <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
+      <div className="relative w-full max-w-5xl rounded-xl border border-white/10 bg-[#0b1020] shadow-2xl shadow-blue-950/50">
+        <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-blue-300 font-mono">
               PDF Preview
             </p>
-            <h3 className="mt-1 text-lg font-semibold text-white">{title}</h3>
+            <h3 className="mt-1 text-md font-semibold text-white">{title}</h3>
           </div>
 
           <button
@@ -107,7 +110,7 @@ export default function PdfViewer({ src, title, isOpen, onClose }: PdfViewerProp
             onClick={onClose}
             className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-200 transition hover:border-blue-400 hover:text-white"
           >
-            Close
+            <RxExit className="w-4 h-4" />
           </button>
         </div>
 
