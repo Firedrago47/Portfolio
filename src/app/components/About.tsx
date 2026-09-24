@@ -68,7 +68,7 @@ export default function About() {
     {
       id: 1,
       icon: <Eye className="w-6 h-6" />,
-      href: "/resume/Deepan_Raj_S_SECV.pdf",
+      href: "/resume/resume.pdf",
       title: "View Resume",
       action: "view",
       onClick: () => setPdfOpen(true),
@@ -270,7 +270,7 @@ export default function About() {
       </div>
 
       <PdfViewer
-        src="/resume/Deepan_Raj_S_SECV.pdf"
+        src="/resume/resume.pdf"
         title="Resume"
         isOpen={pdfOpen}
         onClose={() => setPdfOpen(false)}
