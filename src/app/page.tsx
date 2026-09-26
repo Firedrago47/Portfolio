@@ -16,35 +16,35 @@ const items: TimelineItem[] = [
     title: "HIGH SCHOOL EDUCATION - COMPUTER SCIENCE",
     period: "2020 - 2022",
     description:
-      "Completed higher secondary education with a focus on Computer Science and Mathematics. Developed an early interest in programming and technology.",
+      "Completed higher secondary education with a focus on Computer Science and Mathematics, which laid the groundwork for my interest in technology, programming, and problem solving.",
     type: "Education",
   },
   {
     title: "BACHELOR OF COMPUTER SCIENCE AND DESIGN",
     period: "2022 - 2026",
     description:
-    "Graduated with a degree in Computer Science. Built a strong foundation in algorithms, data structures, and web development. Participated in hackathons and open-source contributions.",
+      "Graduated with a degree in Computer Science, building a strong foundation in algorithms, data structures, and software engineering while exploring practical application development and collaborative technology projects.",
     type: "Education",
   },
   {
     title: "FULL-STACK DEVELOPMENT",
     period: "2023 - Present",
     description:
-      "Built applications and websites with React, Next.js, Node.js, and Tailwind CSS. This experience gave me a strong foundation in software development, system thinking, and practical problem solving.",
+      "Built web applications and interfaces using React, Next.js, Node.js, and Tailwind CSS, strengthening my engineering mindset, software design thinking, and end-to-end product development skills.",
     type: "Experience",
   },
   {
     title: "SECURITY OPERATIONS ENGINEER INTERN - XIOTZ PRIVATE LIMITED",
     period: "MAY 2026 - JUL 2026",
     description:
-      "Previously gained practical exposure to security monitoring, incident response, Wazuh, and Linux fundamentals as a Security Operations Engineer intern.",
+      "Gained hands-on experience in security monitoring, incident response, and Linux-based operations, working with tools such as Wazuh and Kali Linux to understand alert triage and real-world SOC workflows.",
     type: "Experience",
   },
   {
-    title: "SEEKING SECURITY & CLOUD OPPORTUNITIES",
+    title: "SECURITY & CLOUD FOCUS",
     period: "Current focus",
     description:
-      "Currently interning at Xiotz Private Limited as a Security Operations Engineer, gaining hands-on experience with monitoring, incident response, Wazuh, Kali Linux, and Linux fundamentals. My Arch Linux background has also strengthened the command-line and system skills that support both security operations and DevOps-oriented work.",
+      "Targeting Security Operations Engineer and Cloud Security roles, with a focus on monitoring, incident handling, and secure systems operations. I continue to strengthen my Linux, Python, and security tooling skills to build a practical foundation for operational security roles.",
     type: "Experience",
   },
 
