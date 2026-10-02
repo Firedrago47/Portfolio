@@ -109,8 +109,8 @@ export default function PdfViewer({ src, title, isOpen, onClose }: PdfViewerProp
 
   if (!pdfModule) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div className="rounded-xl border border-white/10 bg-[#0b1020] px-6 py-4 text-sm text-gray-300 font-mono">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-md p-4">
+        <div className="rounded-xl border border-white/20 bg-white/[0.08] px-6 py-4 text-sm text-gray-200 font-mono shadow-2xl backdrop-blur-2xl">
           Loading PDF…
         </div>
       </div>
@@ -120,9 +120,10 @@ export default function PdfViewer({ src, title, isOpen, onClose }: PdfViewerProp
   const { Document, Page } = pdfModule;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-5xl rounded-xl border border-white/10 bg-[#0b1020] shadow-2xl shadow-blue-950/50">
-        <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-md p-4">
+      <div className="relative isolate w-full max-w-5xl overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/[0.13] via-white/[0.07] to-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl backdrop-saturate-150">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+        <div className="flex items-center justify-between gap-4 border-b border-white/15 bg-white/[0.04] px-4 py-3">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-blue-300 font-mono">
               PDF Preview
@@ -171,7 +172,7 @@ export default function PdfViewer({ src, title, isOpen, onClose }: PdfViewerProp
 
         <div
           ref={scrollRef}
-          className="max-h-[80vh] overflow-auto bg-black/20 p-4"
+          className="max-h-[80vh] overflow-auto bg-black/15 p-4"
         >
           <div className="flex justify-center">
             <Document

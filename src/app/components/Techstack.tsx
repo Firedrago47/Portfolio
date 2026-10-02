@@ -82,6 +82,17 @@ export default function TechStack() {
               key={tech.name}
               onMouseEnter={() => setHoveredTech(tech.name)}
               onMouseLeave={() => setHoveredTech(null)}
+              onPointerMove={(event) => {
+                if (event.pointerType !== "mouse") return;
+
+                const bounds = event.currentTarget.getBoundingClientRect();
+                event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+                event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+                event.currentTarget.style.setProperty("--pointer-glow-opacity", "32%");
+              }}
+              onPointerLeave={(event) => {
+                event.currentTarget.style.setProperty("--pointer-glow-opacity", "0%");
+              }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -95,6 +106,7 @@ export default function TechStack() {
               style={{
                 borderColor:
                   hoveredTech === tech.name ? tech.color : "rgba(60,60,60,0.6)",
+                backgroundImage: `radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 50%), color-mix(in srgb, ${tech.color} var(--pointer-glow-opacity, 0%), transparent), transparent 100%)`,
               }}
             >
               <div className="flex justify-between items-center mb-3">

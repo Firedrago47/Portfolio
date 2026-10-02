@@ -28,6 +28,19 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const handleCardPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+    event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+    event.currentTarget.style.setProperty("--pointer-glow-opacity", "0.24");
+  };
+
+  const handleCardPointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--pointer-glow-opacity", "0");
+  };
+
   const setup = useCallback(() => {
     const track = trackRef.current;
     const glow = glowRef.current;
@@ -209,11 +222,16 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
                     // Card on the left
                     <div
                       ref={(el) => { cardRefs.current[idx] = el; }}
+                      onPointerMove={handleCardPointerMove}
+                      onPointerLeave={handleCardPointerLeave}
                       className="w-full max-w-[480px] p-4 sm:p-5 rounded-xl
                         bg-white/5 backdrop-blur-sm border border-white/10
                         shadow-[0_0_8px_rgba(59,130,246,0.12)]
                         text-gray-400 transition-colors duration-300
                         hover:border-blue-500/50 hover:bg-gray-900/80 hover:text-gray-200"
+                      style={{
+                        backgroundImage: "radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(59,130,246,var(--pointer-glow-opacity,0)), transparent 100%)",
+                      }}
                     >
                       <p className="text-sm sm:text-base leading-snug">{item.description}</p>
                     </div>
@@ -237,11 +255,16 @@ export default function VerticalTimeline({ items }: VerticalTimelineProps) {
                     // Card on the right
                     <div
                       ref={(el) => { cardRefs.current[idx] = el; }}
+                      onPointerMove={handleCardPointerMove}
+                      onPointerLeave={handleCardPointerLeave}
                       className="w-full max-w-[480px] p-4 sm:p-5 rounded-xl
                         bg-white/5 backdrop-blur-sm border border-white/10
                         shadow-[0_0_8px_rgba(59,130,246,0.12)]
                         text-gray-400 transition-colors duration-300
                         hover:border-blue-500/50 hover:bg-gray-900/80 hover:text-gray-200"
+                      style={{
+                        backgroundImage: "radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(59,130,246,var(--pointer-glow-opacity,0)), transparent 100%)",
+                      }}
                     >
                       <p className="text-sm sm:text-base leading-snug">{item.description}</p>
                     </div>

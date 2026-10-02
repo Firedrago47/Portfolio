@@ -229,6 +229,17 @@ function ProjectCard({
       target="_blank"
       rel="noopener noreferrer"
       onMouseEnter={onActivate}
+      onPointerMove={(event) => {
+        if (event.pointerType !== "mouse") return;
+
+        const bounds = event.currentTarget.getBoundingClientRect();
+        event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+        event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+        event.currentTarget.style.setProperty("--pointer-glow-opacity", "0.2");
+      }}
+      onPointerLeave={(event) => {
+        event.currentTarget.style.setProperty("--pointer-glow-opacity", "0");
+      }}
       onFocus={onFocusActivate}
       transition={{ layout: { type: "spring", stiffness: 180, damping: 26, mass: 0.9 } }}
       className={`${className} relative isolate overflow-hidden rounded-2xl border border-white/10 ${
@@ -236,6 +247,13 @@ function ProjectCard({
       } p-5 sm:p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)]`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_45%)]" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          backgroundImage: "radial-gradient(circle 240px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(96,165,250,var(--pointer-glow-opacity,0)), transparent 100%)",
+        }}
+      />
 
       {!isActive && (
       <motion.div

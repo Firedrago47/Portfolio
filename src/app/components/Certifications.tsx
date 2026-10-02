@@ -116,7 +116,21 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 viewport={{ once: true }}
+                onPointerMove={(event) => {
+                  if (event.pointerType !== "mouse") return;
+
+                  const bounds = event.currentTarget.getBoundingClientRect();
+                  event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+                  event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+                  event.currentTarget.style.setProperty("--pointer-glow-opacity", "0.2");
+                }}
+                onPointerLeave={(event) => {
+                  event.currentTarget.style.setProperty("--pointer-glow-opacity", "0");
+                }}
                 className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm"
+                style={{
+                  backgroundImage: "radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(96,165,250,var(--pointer-glow-opacity,0)), transparent 100%)",
+                }}
               >
                 <div className="flex items-center gap-8">
 
@@ -148,7 +162,23 @@ export default function Certifications() {
 
         {activeTab === "badges" && (
           <div className="flex min-h-[300px] gap-8 items-center justify-center mt-8">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+            <div
+              onPointerMove={(event) => {
+                if (event.pointerType !== "mouse") return;
+
+                const bounds = event.currentTarget.getBoundingClientRect();
+                event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+                event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+                event.currentTarget.style.setProperty("--pointer-glow-opacity", "0.2");
+              }}
+              onPointerLeave={(event) => {
+                event.currentTarget.style.setProperty("--pointer-glow-opacity", "0");
+              }}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm"
+              style={{
+                backgroundImage: "radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(96,165,250,var(--pointer-glow-opacity,0)), transparent 100%)",
+              }}
+            >
               <Image
                 src="/images/badges/cloud.jpeg"
                 alt="AWS Cloud Practitioner badge"
@@ -157,7 +187,23 @@ export default function Certifications() {
                 className="h-auto w-[180px] object-contain"
               />
             </div>
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+            <div
+              onPointerMove={(event) => {
+                if (event.pointerType !== "mouse") return;
+
+                const bounds = event.currentTarget.getBoundingClientRect();
+                event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+                event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+                event.currentTarget.style.setProperty("--pointer-glow-opacity", "0.2");
+              }}
+              onPointerLeave={(event) => {
+                event.currentTarget.style.setProperty("--pointer-glow-opacity", "0");
+              }}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm"
+              style={{
+                backgroundImage: "radial-gradient(circle 180px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(96,165,250,var(--pointer-glow-opacity,0)), transparent 100%)",
+              }}
+            >
               <Image
                 src="/images/badges/AI.jpeg"
                 alt="AWS Cloud Practitioner badge"
