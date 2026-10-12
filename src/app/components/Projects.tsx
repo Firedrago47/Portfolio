@@ -140,7 +140,7 @@ export default function Projects() {
         viewport={{ once: true }}
         className="text-base sm:text-lg max-w-2xl text-center text-gray-300 mx-auto mb-10"
       >
-        Hover a project card to expand it and inspect details.
+        Select a project to explore its details.
       </motion.p>
 
       <motion.div
@@ -149,7 +149,7 @@ export default function Projects() {
           clearHoverTimeout();
           setActiveIndex(null);
         }}
-        className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-4 auto-rows-[220px] sm:auto-rows-[250px] md:auto-rows-[210px] gap-4 sm:gap-6"
+        className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-4 auto-rows-[minmax(280px,auto)] sm:auto-rows-[minmax(300px,auto)] md:auto-rows-[210px] gap-4 sm:gap-6"
       >
         {projects.map((project, index) => (
           <ProjectCard
@@ -255,10 +255,9 @@ function ProjectCard({
         }}
       />
 
-      {!isActive && (
       <motion.div
         layout
-        className={`relative z-10 flex h-full flex-col ${isActive ? "md:w-[52%]" : "w-full"}`}
+        className={`relative z-10 flex h-full flex-col ${isActive ? "md:hidden" : "w-full"}`}
         >
         <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3">Featured Project</p>
         <h2 className="text-lg sm:text-xl leading-tight text-white">{project.title}</h2>
@@ -282,7 +281,6 @@ function ProjectCard({
           </span>
         </div>
       </motion.div>
-        )}
 
       <AnimatePresence mode="wait">
         {isActive && (
